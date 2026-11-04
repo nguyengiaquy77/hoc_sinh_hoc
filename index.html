@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Ôn Tập Sinh Học 11 - 70 Câu</title>
+  <style>
+    :root {
+      --primary: #1b365d;
+      --accent: #2563eb;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #1e293b;
+      --correct: #16a34a;
+      --correct-bg: #dcfce7;
+      --wrong: #dc2626;
+      --wrong-bg: #fee2e2;
+      --border: #cbd5e1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
+    header {
+      background: var(--primary); color: #fff; padding: 16px 20px;
+      position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .header-inner {
+      max-width: 960px; margin: 0 auto; display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center; gap: 12px;
+    }
+    h1 { font-size: 1.2rem; }
+    .stats { display: flex; gap: 10px; font-size: 0.9rem; flex-wrap: wrap; }
+    .badge { background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 6px; font-weight: 600; }
+    .toolbar {
+      max-width: 960px; margin: 16px auto; padding: 0 16px;
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center;
+    }
+    .btn {
+      padding: 8px 14px; border: none; border-radius: 8px; cursor: pointer;
+      font-weight: 600; font-size: 0.9rem; transition: 0.15s;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #1d4ed8; }
+    .btn-outline { background: #fff; color: var(--primary); border: 1px solid var(--border); }
+    .btn-outline.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .btn-danger { background: var(--wrong); color: #fff; }
+    .btn-success { background: var(--correct); color: #fff; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+    .q-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+      gap: 6px; background: #fff; padding: 14px; border-radius: 10px;
+      border: 1px solid var(--border); margin-bottom: 16px;
+    }
+    .q-dot {
+      height: 34px; border-radius: 6px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 600; cursor: pointer; background: #f8fafc;
+    }
+    .q-dot.done-ok { background: var(--correct-bg); color: var(--correct); border-color: var(--correct); }
+    .q-dot.done-err { background: var(--wrong-bg); color: var(--wrong); border-color: var(--wrong); }
+    .q-dot.done-wait { background: #dbeafe; color: var(--accent); border-color: var(--accent); }
+    .card {
+      background: var(--card); border-radius: 12px; padding: 18px 20px;
+      margin-bottom: 14px; border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .q-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 12px; line-height: 1.45; white-space: pre-line; }
+    .q-num { color: var(--accent); margin-right: 6px; }
+    .options { display: grid; gap: 8px; }
+    .opt-btn {
+      text-align: left; padding: 11px 14px; border-radius: 8px;
+      border: 1px solid var(--border); background: #f8fafc;
+      cursor: pointer; font-size: 0.96rem; transition: 0.12s; line-height: 1.4;
+    }
+    .opt-btn:hover { background: #e2e8f0; }
+    .opt-btn.selected { border-color: var(--accent); background: #dbeafe; font-weight: 600; }
+    .opt-btn.correct { border-color: var(--correct); background: var(--correct-bg); color: #14532d; font-weight: 700; }
+    .opt-btn.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: #7f1d1d; text-decoration: line-through; }
+    .sub-table {
+      width: 100%; border-collapse: collapse; margin: 10px 0 14px; font-size: 0.93rem;
+    }
+    .sub-table th, .sub-table td {
+      border: 1px solid var(--border); padding: 8px 10px; text-align: left;
+    }
+    .sub-table th { background: #e2e8f0; text-align: center; }
+    .tf-btn {
+      padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border);
+      cursor: pointer; font-weight: 600; background: #fff;
+    }
+    .tf-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .tf-btn.correct { background: var(--correct); color: #fff; border-color: var(--correct); }
+    .tf-btn.wrong { background: var(--wrong); color: #fff; border-color: var(--wrong); }
+    .explain {
+      margin-top: 10px; padding: 10px 12px; border-radius: 8px;
+      background: #f0fdf4; border-left: 4px solid var(--correct); font-size: 0.9rem; display: none;
+    }
+    .explain.show { display: block; }
+    .essay-box { line-height: 1.6; }
+    .essay-box h3 { color: var(--primary); margin: 12px 0 6px; }
+    .essay-box ul { padding-left: 20px; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>🌿 Ôn Tập Sinh Học 11 (70 Câu Trắc Nghiệm & Tự Luận)</h1>
+    <div class="stats">
+      <span class="badge" id="stat-done">Đã làm: 0/70</span>
+      <span class="badge" id="stat-correct">Đúng: 0</span>
+      <span class="badge" id="stat-score">Điểm: 0.00</span>
+    </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div style="display:flex; gap:6px; flex-wrap:wrap;">
+    <button class="btn btn-outline active" id="mode-instant" onclick="setMode('instant')">⚡ Luyện tập (Biết đáp án ngay)</button>
+    <button class="btn btn-outline" id="mode-exam" onclick="setMode('exam')">📝 Thi thử (Nộp bài mới chấm)</button>
+    <button class="btn btn-outline" id="tab-essay" onclick="toggleEssay()">📖 Xem 2 câu Tự luận</button>
+  </div>
+  <div style="display:flex; gap:6px; flex-wrap:wrap;">
+    <button class="btn btn-primary" onclick="shuffleQuestions()">🔀 Đảo câu hỏi</button>
+    <button class="btn btn-success" id="btn-submit" style="display:none;" onclick="submitExam()">✅ Nộp bài chấm điểm</button>
+    <button class="btn btn-outline" onclick="filterWrong()">🎯 Làm lại câu sai</button>
+    <button class="btn btn-danger" onclick="resetQuiz()">🔄 Làm lại từ đầu</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="q-grid" id="nav-grid"></div>
+  <div id="quiz-area"></div>
+  <div id="essay-area" style="display:none;">
+    <div class="card essay-box">
+      <h3>Câu 1 (Tự luận): Hô hấp, lên men và bảo quản nông sản</h3>
+      <ul>
+        <li><b>Hô hấp hiếu khí (có O₂ - 3 giai đoạn):</b>
+          <br>1. <i>Đường phân (Tế bào chất):</i> 1 Glucose → 2 Pyruvic acid + 2 ATP + 2 NADH.
+          <br>2. <i>Oxi hóa pyruvic acid & Chu trình Krebs (Chất nền ti thể):</i> 2 Pyruvic acid → 6 CO₂ + 2 ATP + 8 NADH + 2 FADH₂.
+          <br>3. <i>Chuỗi truyền electron (Màng trong ti thể):</i> 10 NADH + 2 FADH₂ + O₂ → H₂O + 26–28 ATP (Tổng: 30–32 hoặc 36–38 ATP).
+        </li>
+        <li><b>Lên men (thiếu O₂ - 2 giai đoạn tại tế bào chất):</b> Đường phân (tạo 2 Pyruvic acid + 2 ATP) → Lên men tạo Ethanol + CO₂ (lên men rượu) hoặc Lactic acid (lên men lactic). Tổng chỉ thu được 2 ATP.</li>
+        <li><b>Các biện pháp bảo quản nông sản:</b> Bảo quản khô (phơi/sấy hạt), bảo quản lạnh (tủ mát/kho lạnh), bảo quản trong khí quyển biến đổi (tăng CO₂, giảm O₂, hút chân không).</li>
+        <li><b>Vì sao rau siêu thị để trong túi nilon đục lỗ ở tủ mát?</b> Tủ mát hạ nhiệt độ giúp giảm hoạt tính enzyme hô hấp (giảm tiêu hao chất hữu cơ) và ức chế vi sinh vật; túi nilon giữ độ ẩm chống héo
