@@ -3,122 +3,214 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Ôn Tập Đa Môn - Sinh Học 11 & Địa Lý</title>
+  <title>Quiz Ôn Tập Đa Môn - Sinh Học 11 & Địa Lý 11 (70 Câu)</title>
   <style>
     :root {
-      --primary: #1b365d;
-      --accent: #2563eb;
-      --bg: #f1f5f9;
-      --card: #ffffff;
-      --text: #1e293b;
-      --correct: #16a34a;
-      --correct-bg: #dcfce7;
-      --wrong: #dc2626;
-      --wrong-bg: #fee2e2;
-      --border: #cbd5e1;
+      --primary: #db2777;        /* Hồng đậm chủ đạo */
+      --primary-dark: #be185d;   /* Hồng trầm khi hover */
+      --primary-light: #fce7f3;  /* Hồng phấn nhạt */
+      --primary-soft: #fdf2f8;   /* Nền trắng ánh hồng nhẹ */
+      --accent: #ec4899;         /* Hồng tươi điểm nhấn */
+      --bg: #fff5f9;             /* Nền trang trắng hồng pastel */
+      --card: #ffffff;           /* Nền thẻ trắng tinh */
+      --text: #331826;           /* Chữ tím hồng than dễ đọc */
+      --muted: #83586d;
+      --correct: #10b981;
+      --correct-bg: #d1fae5;
+      --wrong: #f43f5e;
+      --wrong-bg: #ffe4e6;
+      --border: #f9a8d4;         /* Viền hồng pastel */
+      --border-soft: #fbcfe8;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
-    body { background: var(--bg); color: var(--text); padding-bottom: 50px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding-bottom: 60px; }
+
+    /* Header trắng - hồng */
     header {
-      background: var(--primary); color: #fff; padding: 16px 20px;
-      position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+      color: #ffffff; padding: 16px 20px;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 4px 15px rgba(219, 39, 119, 0.22);
     }
     .header-inner {
-      max-width: 960px; margin: 0 auto; display: flex; flex-wrap: wrap;
+      max-width: 980px; margin: 0 auto; display: flex; flex-wrap: wrap;
       justify-content: space-between; align-items: center; gap: 12px;
     }
-    h1 { font-size: 1.2rem; }
-    .stats { display: flex; gap: 10px; font-size: 0.9rem; flex-wrap: wrap; }
-    .badge { background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 6px; font-weight: 600; }
-    
-    /* Thanh chọn môn học */
-    .subject-bar {
-      background: #0f172a; padding: 10px 20px; text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .sub-select-btn {
-      padding: 6px 16px; border-radius: 20px; border: 1px solid #475569;
-      background: #1e293b; color: #cbd5e1; font-weight: 600; cursor: pointer;
-      margin: 0 5px; transition: 0.2s; font-size: 0.9rem;
-    }
-    .sub-select-btn.active {
-      background: var(--accent); color: #fff; border-color: var(--accent);
+    h1 { font-size: 1.22rem; font-weight: 700; letter-spacing: 0.2px; }
+    .stats { display: flex; gap: 8px; font-size: 0.9rem; flex-wrap: wrap; }
+    .badge {
+      background: rgba(255, 255, 255, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 5px 12px; border-radius: 999px; font-weight: 600;
+      backdrop-filter: blur(4px);
     }
 
+    /* Thanh chọn môn học */
+    .subject-bar {
+      background: #ffffff; padding: 12px 20px; text-align: center;
+      border-bottom: 2px solid var(--border-soft);
+      box-shadow: 0 2px 8px rgba(236, 72, 153, 0.06);
+    }
+    .sub-select-btn {
+      padding: 8px 20px; border-radius: 999px; border: 2px solid var(--border);
+      background: #ffffff; color: var(--primary); font-weight: 700; cursor: pointer;
+      margin: 0 6px; transition: all 0.2s ease; font-size: 0.95rem;
+    }
+    .sub-select-btn:hover { background: var(--primary-soft); transform: translateY(-1px); }
+    .sub-select-btn.active {
+      background: linear-gradient(135deg, #ec4899, #db2777);
+      color: #ffffff; border-color: var(--primary);
+      box-shadow: 0 4px 10px rgba(219, 39, 119, 0.28);
+    }
+
+    /* Thanh công cụ */
     .toolbar {
-      max-width: 960px; margin: 16px auto; padding: 0 16px;
+      max-width: 980px; margin: 16px auto; padding: 0 16px;
       display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center;
     }
     .btn {
-      padding: 8px 14px; border: none; border-radius: 8px; cursor: pointer;
-      font-weight: 600; font-size: 0.9rem; transition: 0.15s;
+      padding: 9px 15px; border: none; border-radius: 10px; cursor: pointer;
+      font-weight: 600; font-size: 0.9rem; transition: all 0.15s ease;
     }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: #1d4ed8; }
-    .btn-outline { background: #fff; color: var(--primary); border: 1px solid var(--border); }
-    .btn-outline.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .btn-danger { background: var(--wrong); color: #fff; }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 2px 6px rgba(236, 72, 153, 0.3);
+    }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-outline {
+      background: #ffffff; color: var(--primary);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { background: var(--primary-light); }
+    .btn-outline.active {
+      background: var(--primary); color: #ffffff; border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(219, 39, 119, 0.25);
+    }
+    .btn-danger { background: #f43f5e; color: #fff; }
+    .btn-danger:hover { background: #e11d48; }
     .btn-success { background: var(--correct); color: #fff; }
-    .container { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+    .btn-success:hover { background: #059669; }
+
+    .container { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+
+    /* Bảng số thứ tự 70 câu */
     .q-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
-      gap: 6px; background: #fff; padding: 14px; border-radius: 10px;
-      border: 1px solid var(--border); margin-bottom: 16px;
+      gap: 6px; background: #ffffff; padding: 14px; border-radius: 14px;
+      border: 1.5px solid var(--border-soft); margin-bottom: 18px;
+      box-shadow: 0 2px 10px rgba(236, 72, 153, 0.06);
     }
     .q-dot {
-      height: 34px; border-radius: 6px; border: 1px solid var(--border);
+      height: 34px; border-radius: 8px; border: 1px solid var(--border-soft);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem; font-weight: 600; cursor: pointer; background: #f8fafc;
+      font-size: 0.84rem; font-weight: 600; cursor: pointer;
+      background: var(--primary-soft); color: var(--primary); transition: 0.15s;
     }
-    .q-dot.done-ok { background: var(--correct-bg); color: var(--correct); border-color: var(--correct); }
-    .q-dot.done-err { background: var(--wrong-bg); color: var(--wrong); border-color: var(--wrong); }
-    .q-dot.done-wait { background: #dbeafe; color: var(--accent); border-color: var(--accent); }
+    .q-dot:hover { background: var(--primary-light); border-color: var(--accent); }
+    .q-dot.done-ok { background: var(--correct-bg); color: #065f46; border-color: var(--correct); }
+    .q-dot.done-err { background: var(--wrong-bg); color: #9f1239; border-color: var(--wrong); }
+    .q-dot.done-wait { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+
+    /* Thẻ câu hỏi */
     .card {
-      background: var(--card); border-radius: 12px; padding: 18px 20px;
-      margin-bottom: 14px; border: 1px solid var(--border);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      background: var(--card); border-radius: 14px; padding: 18px 20px;
+      margin-bottom: 14px; border: 1.5px solid var(--border-soft);
+      box-shadow: 0 3px 10px rgba(236, 72, 153, 0.05);
     }
-    .q-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 12px; line-height: 1.45; white-space: pre-line; }
-    .q-num { color: var(--accent); margin-right: 6px; }
+    .q-title { font-weight: 700; font-size: 1.04rem; margin-bottom: 12px; line-height: 1.48; white-space: pre-line; }
+    .q-num {
+      color: #ffffff; background: var(--accent); padding: 2px 9px;
+      border-radius: 999px; margin-right: 8px; font-size: 0.9rem; display: inline-block;
+    }
     .options { display: grid; gap: 8px; }
     .opt-btn {
-      text-align: left; padding: 11px 14px; border-radius: 8px;
-      border: 1px solid var(--border); background: #f8fafc;
-      cursor: pointer; font-size: 0.96rem; transition: 0.12s; line-height: 1.4;
+      text-align: left; padding: 11px 14px; border-radius: 10px;
+      border: 1.5px solid var(--border-soft); background: var(--primary-soft);
+      cursor: pointer; font-size: 0.96rem; transition: 0.14s; line-height: 1.42; color: var(--text);
     }
-    .opt-btn:hover { background: #e2e8f0; }
-    .opt-btn.selected { border-color: var(--accent); background: #dbeafe; font-weight: 600; }
-    .opt-btn.correct { border-color: var(--correct); background: var(--correct-bg); color: #14532d; font-weight: 700; }
-    .opt-btn.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: #7f1d1d; text-decoration: line-through; }
+    .opt-btn:hover { background: var(--primary-light); border-color: var(--accent); }
+    .opt-btn.selected { border-color: var(--primary); background: var(--primary-light); font-weight: 700; color: var(--primary-dark); }
+    .opt-btn.correct { border-color: var(--correct); background: var(--correct-bg); color: #065f46; font-weight: 700; }
+    .opt-btn.wrong { border-color: var(--wrong); background: var(--wrong-bg); color: #9f1239; text-decoration: line-through; }
+
     .sub-table {
       width: 100%; border-collapse: collapse; margin: 10px 0 14px; font-size: 0.93rem;
+      border-radius: 8px; overflow: hidden;
     }
     .sub-table th, .sub-table td {
-      border: 1px solid var(--border); padding: 8px 10px; text-align: left;
+      border: 1px solid var(--border-soft); padding: 9px 11px; text-align: left;
     }
-    .sub-table th { background: #e2e8f0; text-align: center; }
+    .sub-table th { background: var(--primary-light); color: var(--primary-dark); text-align: center; }
+
     .tf-btn {
-      padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border);
-      cursor: pointer; font-weight: 600; background: #fff;
+      padding: 5px 12px; border-radius: 8px; border: 1.5px solid var(--border);
+      cursor: pointer; font-weight: 600; background: #fff; color: var(--primary);
     }
-    .tf-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .tf-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
     .tf-btn.correct { background: var(--correct); color: #fff; border-color: var(--correct); }
     .tf-btn.wrong { background: var(--wrong); color: #fff; border-color: var(--wrong); }
+
     .explain {
-      margin-top: 10px; padding: 10px 12px; border-radius: 8px;
-      background: #f0fdf4; border-left: 4px solid var(--correct); font-size: 0.9rem; display: none;
+      margin-top: 10px; padding: 10px 13px; border-radius: 10px;
+      background: var(--primary-soft); border-left: 4px solid var(--primary);
+      font-size: 0.91rem; display: none; color: var(--text);
     }
     .explain.show { display: block; }
-    .essay-box { line-height: 1.6; }
-    .essay-box h3 { color: var(--primary); margin: 12px 0 6px; }
-    .essay-box ul { padding-left: 20px; margin-bottom: 10px; }
+
+    /* Khu vực Tự luận tương tác */
+    .essay-card {
+      background: #ffffff; border-radius: 16px; padding: 22px;
+      margin-bottom: 18px; border: 2px solid var(--border-soft);
+      box-shadow: 0 4px 14px rgba(236, 72, 153, 0.08);
+    }
+    .essay-header {
+      font-size: 1.1rem; font-weight: 700; color: var(--primary-dark);
+      margin-bottom: 8px; line-height: 1.45;
+    }
+    .essay-prompt {
+      background: var(--primary-soft); border: 1px dashed var(--border);
+      padding: 12px 14px; border-radius: 10px; margin-bottom: 12px;
+      font-size: 0.95rem; line-height: 1.55;
+    }
+    .essay-textarea {
+      width: 100%; min-height: 150px; padding: 13px 15px;
+      border-radius: 12px; border: 2px solid var(--border);
+      background: #fffafa; color: var(--text); font-size: 0.96rem;
+      line-height: 1.55; resize: vertical; outline: none; transition: 0.2s;
+    }
+    .essay-textarea:focus {
+      border-color: var(--primary); background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.18);
+    }
+    .essay-actions {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center;
+    }
+    .essay-feedback {
+      margin-top: 12px; padding: 12px 15px; border-radius: 10px;
+      background: var(--primary-soft); border-left: 4px solid var(--accent);
+      font-size: 0.93rem; line-height: 1.55; display: none;
+    }
+    .essay-feedback.show { display: block; }
+    .essay-sample {
+      margin-top: 12px; padding: 14px 16px; border-radius: 12px;
+      background: #fdf2f8; border: 1.5px solid var(--border);
+      font-size: 0.94rem; line-height: 1.65; display: none;
+    }
+    .essay-sample.show { display: block; }
+    .essay-sample ul { padding-left: 20px; margin-top: 6px; }
+    .kw-tag {
+      display: inline-block; padding: 3px 9px; border-radius: 999px;
+      font-size: 0.82rem; font-weight: 600; margin: 3px 4px 3px 0;
+    }
+    .kw-ok { background: var(--correct-bg); color: #065f46; border: 1px solid var(--correct); }
+    .kw-miss { background: var(--wrong-bg); color: #9f1239; border: 1px solid var(--wrong); }
   </style>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <h1 id="header-title">🌿 Ôn Tập Sinh Học 11 (70 Câu)</h1>
+    <h1 id="header-title">🌸 Ôn Tập Sinh Học 11 (70 Câu Trắc Nghiệm & Tự Luận)</h1>
     <div class="stats">
       <span class="badge" id="stat-done">Đã làm: 0/70</span>
       <span class="badge" id="stat-correct">Đúng: 0</span>
@@ -127,19 +219,19 @@
   </div>
 </header>
 
-<!-- THANH CHUYỂN ĐỔI MÔN HỌC -->
+<!-- THANH CHỌN MÔN HỌC -->
 <div class="subject-bar">
-  <button class="sub-select-btn active" id="btn-sub-bio" onclick="switchSubject('bio')">🧬 Sinh Học 11</button>
-  <button class="sub-select-btn" id="btn-sub-geo" onclick="switchSubject('geo')">🌍 Địa Lý</button>
+  <button class="sub-select-btn active" id="btn-sub-bio" onclick="switchSubject('bio')">🧬 Sinh Học 11 (70 câu + Tự luận)</button>
+  <button class="sub-select-btn" id="btn-sub-geo" onclick="switchSubject('geo')">🌍 Địa Lý 11 (70 câu + Tự luận)</button>
 </div>
 
 <div class="toolbar">
   <div style="display:flex; gap:6px; flex-wrap:wrap;">
-    <button class="btn btn-outline active" id="mode-instant" onclick="setMode('instant')">⚡ Luyện tập (Biết đáp án ngay)</button>
+    <button class="btn btn-outline active" id="mode-instant" onclick="setMode('instant')">⚡ Luyện tập (Biết ngay)</button>
     <button class="btn btn-outline" id="mode-exam" onclick="setMode('exam')">📝 Thi thử (Nộp bài mới chấm)</button>
-    <button class="btn btn-outline" id="tab-essay" onclick="toggleEssay()">📖 Xem Tự luận / Tóm tắt</button>
+    <button class="btn btn-outline" id="tab-essay" onclick="toggleEssay()">✍️ Làm Tự luận (Có ô điền đáp án)</button>
   </div>
-  <div style="display:flex; gap:6px; flex-wrap:wrap;">
+  <div style="display:flex; gap:6px; flex-wrap:wrap;" id="quiz-controls">
     <button class="btn btn-primary" onclick="shuffleQuestions()">🔀 Đảo câu hỏi</button>
     <button class="btn btn-success" id="btn-submit" style="display:none;" onclick="submitExam()">✅ Nộp bài chấm điểm</button>
     <button class="btn btn-outline" onclick="filterWrong()">🎯 Làm lại câu sai</button>
@@ -154,7 +246,7 @@
 </div>
 
 <script>
-// ==================== DỮ LIỆU MÔN SINH HỌC 11 ====================
+// ==================== 1. DỮ LIỆU 70 CÂU SINH HỌC 11 ====================
 const BIO_QUESTIONS = [
   {id:1, q:"Rễ cây hấp thụ những chất nào?", opts:["A. Nước cùng các ion khoáng.","B. Nước cùng các chất dinh dưỡng.","C. Nước và các chất khí.","D. O₂ và các chất dinh dưỡng hòa tan trong nước."], ans:0},
   {id:2, q:"Bộ phận hút nước chủ yếu của cây ở trên cạn là", opts:["A. lá, thân, rễ.","B. lá, thân.","C. rễ, thân.","D. Rễ."], ans:3},
@@ -258,46 +350,208 @@ const BIO_QUESTIONS = [
   {id:70, q:"Hấp thụ khoáng theo cơ chế chủ động là ion khoáng từ đất xâm nhập vào rễ cây …(1)… nồng độ, …(2)… ATP.", opts:["A. 1 – cùng chiều; 2 – không tiêu tốn.","B. 1 – cùng chiều; 2 – tiêu tốn.","C. 1 – ngược chiều; 2 – không tiêu tốn.","D. 1 – ngược chiều; 2 – tiêu tốn."], ans:3}
 ];
 
-const BIO_ESSAY = `
-<div class="card essay-box">
-  <h3>Tóm tắt Tự luận Sinh Học 11</h3>
-  <ul>
-    <li><b>Hô hấp hiếu khí (3 giai đoạn):</b> Đường phân (tế bào chất) → Oxi hóa pyruvic acid & Chu trình Krebs (chất nền ti thể) → Chuỗi truyền electron (màng trong ti thể). Tổng thu 30–38 ATP.</li>
-    <li><b>Lên men (thiếu O₂):</b> Đường phân + Lên men rượu (ethanol + CO₂) hoặc Lên men lactic. Chỉ thu 2 ATP.</li>
-    <li><b>Bảo quản nông sản:</b> Bảo quản khô (phơi/sấy hạt), bảo quản lạnh (tủ mát), bảo quản khí quyển biến đổi (CO₂ cao, O₂ thấp).</li>
-    <li><b>Rau trong túi nilon đục lỗ ở tủ mát:</b> Tủ mát giảm hoạt tính enzyme hô hấp và ức chế vi sinh vật; túi nilon giữ ẩm chống héo; lỗ đục giúp thoát hơi nước ngưng tụ (tránh thối nhũn) và cung cấp O₂ duy trì hô hấp hiếu khí tối thiểu.</li>
-    <li><b>Quang hợp:</b> Lục lạp dùng ánh sáng tổng hợp C₆H₁₂O₆ từ CO₂ và H₂O, giải phóng O₂. Pha sáng (màng tilacôit) tạo ATP, NADPH, O₂; Pha tối (strôma) cố định CO₂.</li>
-    <li><b>Phân biệt C₃, C₄, CAM:</b> C₃ sản phẩm đầu tiên là 3C (APG/PGA); C₄ sản phẩm đầu tiên là 4C (OAA); CAM (mọng nước) mở khí khổng ban đêm nhận CO₂ và đóng ban ngày để tiết kiệm nước.</li>
-    <li><b>Trồng cây không cần ánh sáng mặt trời:</b> Dùng đèn LED nông nghiệp (đỏ và xanh tím) thay ánh sáng mặt trời, tối ưu hóa sinh trưởng, không phụ thuộc thời tiết.</li>
-  </ul>
-</div>`;
-
-// ==================== DỮ LIỆU MÔN ĐỊA LÝ (MẪU 10 CÂU, BẠN CÓ THỂ BỔ SUNG THÊM) ====================
+// ==================== 2. DỮ LIỆU 70 CÂU ĐỊA LÝ 11 ====================
 const GEO_QUESTIONS = [
-  {id:1, q:"Việt Nam nằm ở khu vực nào của châu Á?", opts:["A. Tây Á.","B. Nam Á.","C. Đông Nam Á.","D. Trung Á."], ans:2},
-  {id:2, q:"Điểm cực Bắc phần đất liền của nước ta thuộc tỉnh nào?", opts:["A. Hà Giang.","B. Lạng Sơn.","C. Cao Bằng.","D. Lào Cai."], ans:0},
-  {id:3, q:"Đặc điểm nào sau đây không phải của thiên nhiên nhiệt đới ẩm gió mùa nước ta?", opts:["A. Lượng mưa lớn, độ ẩm cao.","B. Khí hậu có 4 mùa rõ rệt ở mọi miền.","C. Gió mùa thao túng khí hậu.","D. Địa hình xâm lấn mạnh vùng đồi núi."], ans:1, note:"Nước ta chỉ có miền Bắc là có 4 mùa rõ rệt, miền Nam chỉ có 2 mùa mưa - khô."},
-  {id:4, q:"Hệ sinh thái rừng đặc trưng nhất của nước ta là gì?", opts:["A. Rừng ôn đới núi cao.","B. Rừng lá kim phương bắc.","C. Rừng nhiệt đới ẩm lá rộng thường xanh.","D. Xavan và cây bụi khô."], ans:2},
-  {id:5, q:"Vùng nào sau đây ở nước ta chịu ảnh hưởng mạnh nhất của bão?", opts:["A. Vùng núi Tây Bắc.","B. Vùng đồng bằng sông Cửu Long.","C. Vùng ven biển miền Trung.","D. Vùng Tây Nguyên."], ans:2},
-  {id:6, q:"Loại khoáng sản có trữ lượng lớn nhất và giá trị kinh tế cao nhất ở thềm lục địa nước ta là gì?", opts:["A. Sắt.","B. Dầu mỏ và khí tự nhiên.","C. Bô-xít.","D. Than đá."], ans:1},
-  {id:7, q:"Đường bờ biển của nước ta dài khoảng bao nhiêu km?", opts:["A. 2.500 km.","B. 3.260 km.","C. 3.500 km.","D. 4.000 km."], ans:1},
-  {id:8, q:"Căn cứ vào Atlat Địa lí Việt Nam, đỉnh núi cao nhất nước ta là gì?", opts:["A. Núi Phượng Hoàng.","B. Đỉnh Fansipan.","C. Núi Ngọc Linh.","D. Đỉnh Bạch Mã."], ans:1},
-  {id:9, q:"Nguyên nhân chủ yếu gây mưa vào mùa hạ cho cả hai miền Nam, Bắc nước ta là do hoạt động của:", opts:["A. Gió mùa Tây Nam và Tín phong bán cầu Bắc.","B. Gió mùa Đông Bắc và dải hội tụ nhiệt đới.","C. Gió mùa Tây Nam và dải hội tụ nhiệt đới / áp thấp nhiệt đới.","D. Gió Tây khô nóng và gió Đông Bắc."], ans:2},
-  {id:10, q:"Tính chất nhiệt đới của khí hậu nước ta được quy định bởi yếu tố nào?", opts:["A. Vị trí nằm trong vùng nội chí tuyến.","B. Giáp biển Đông rộng lớn.","C. Địa hình đồi núi chiếm phần lớn.","D. Chịu ảnh hưởng của các khối khí di chuyển qua biển."], ans:0}
+  {id:1, q:"Tiêu chí nào sau đây KHÔNG dùng để phân loại các nhóm nước phát triển và đang phát triển?", opts:["A. Tổng sản phẩm trong nước bình quân đầu người (GDP/người).","B. Chỉ số phát triển con người (HDI).","C. Cơ cấu kinh tế theo ngành (tỉ trọng công nghiệp - dịch vụ).","D. Diện tích lãnh thổ và quy mô dân số."], ans:3},
+  {id:2, q:"Đặc điểm nổi bật về cơ cấu kinh tế của nhóm nước phát triển là:", opts:["A. Ngành nông nghiệp chiếm tỉ trọng cao nhất.","B. Ngành dịch vụ chiếm tỉ trọng rất cao (thường trên 70% GDP).","C. Ngành khai khoáng chiếm tỉ trọng chủ yếu.","D. Tỉ trọng nông - lâm - ngư nghiệp tăng nhanh."], ans:1},
+  {id:3, q:"Chỉ số phát triển con người (HDI) được tính dựa trên các tiêu chí cơ bản nào?", opts:["A. Tuổi thọ trung bình, số năm đi học và thu nhập bình quân đầu người (GNI/người).","B. Tỉ lệ gia tăng dân số, mật độ dân số và tỉ lệ đô thị hóa.","C. Trình độ công nghệ, năng suất lao động và dự trữ ngoại tệ.","D. Tỉ lệ sinh, tỉ lệ tử và cơ cấu dân số theo tuổi."], ans:0},
+  {id:4, q:"Biểu hiện rõ nét nhất của toàn cầu hóa kinh tế là:", opts:["A. Sự thu hẹp quy mô giao thương giữa các nước.","B. Thương mại thế giới phát triển mạnh, tốc độ tăng trưởng cao hơn tăng trưởng GDP.","C. Các công ty xuyên quốc gia giảm dần phạm vi hoạt động.","D. Các rào cản thuế quan ngày càng tăng lên."], ans:1},
+  {id:5, q:"Tổ chức nào sau đây chi phối tới 95% hoạt động thương mại của thế giới?", opts:["A. Quỹ Tiền tệ Quốc tế (IMF).","B. Ngân hàng Thế giới (WB).","C. Tổ chức Thương mại Thế giới (WTO).","D. Diễn đàn Hợp tác Kinh tế châu Á - Thái Bình Dương (APEC)."], ans:2},
+  {id:6, q:"Hệ quả tiêu cực lớn nhất của toàn cầu hóa kinh tế là:", opts:["A. Kìm hãm sự phát triển của khoa học - công nghệ.","B. Làm gia tăng nhanh chóng khoảng cách giàu nghèo giữa các quốc gia.","C. Hạn chế sự chuyển dịch vốn đầu tư quốc tế.","D. Giảm tốc độ tăng trưởng kinh tế toàn cầu."], ans:1},
+  {id:7, q:"Nguyên nhân chủ yếu nhất dẫn đến sự biến đổi khí hậu toàn cầu hiện nay là:", opts:["A. Các vụ phun trào núi lửa tự nhiên.","B. Lượng khí thải nhà kính (đặc biệt là CO₂) tăng cao do sản xuất công nghiệp và sinh hoạt.","C. Sự dịch chuyển của các mảng kiến tạo.","D. Thay đổi chu kỳ bức xạ của Mặt Trời."], ans:1},
+  {id:8, q:"Vấn đề an ninh phi truyền thống nào sau đây đang đe dọa trực tiếp đến không gian mạng toàn cầu?", opts:["A. An ninh lương thực.","B. An ninh năng lượng.","C. An ninh mạng (tội phạm công nghệ cao).","D. An ninh nguồn nước."], ans:2},
+  {id:9, q:"Khu vực Mỹ Latinh tiếp giáp với hai đại dương lớn nào?", opts:["A. Thái Bình Dương và Ấn Độ Dương.","B. Thái Bình Dương và Đại Tây Dương.","C. Đại Tây Dương và Bắc Băng Dương.","D. Ấn Độ Dương và Bắc Băng Dương."], ans:1},
+  {id:10, q:"Kênh đào Panama ở khu vực Mỹ Latinh nối liền hai đại dương nào?", opts:["A. Thái Bình Dương và Đại Tây Dương.","B. Đại Tây Dương và Ấn Độ Dương.","C. Thái Bình Dương và Bắc Băng Dương.","D. Địa Trung Hải và Biển Đỏ."], ans:0},
+  {id:11, q:"Đới khí hậu chiếm diện tích lớn nhất ở khu vực Mỹ Latinh là:", opts:["A. Khí hậu ôn đới và hàn đới.","B. Khí hậu xích đạo và cận xích đạo, nhiệt đới.","C. Khí hậu cận nhiệt Địa Trung Hải.","D. Khí hậu hoang mạc khắc nghiệt."], ans:1},
+  {id:12, q:"Rừng nhiệt đới ẩm lớn nhất thế giới nằm ở đồng bằng Amazon thuộc quốc gia nào là chủ yếu?", opts:["A. Ác-hen-ti-na.","B. Bra-xin.","C. Mê-hi-cô.","D. Chi-lê."], ans:1},
+  {id:13, q:"Dãy núi trẻ cao và đồ sộ chạy dọc phía tây khu vực Nam Mỹ là:", opts:["A. Dãy Hi-ma-lay-a.","B. Dãy An-đét (Andes).","C. Dãy An-pơ (Alps).","D. Dãy U-ran."], ans:1},
+  {id:14, q:"Đặc điểm nổi bật về đô thị hóa ở khu vực Mỹ Latinh là:", opts:["A. Tỉ lệ dân thành thị rất thấp (dưới 30%).","B. Tỉ lệ dân thành thị rất cao (khoảng 80%) nhưng mang tính tự phát.","C. Đô thị hóa gắn liền chặt chẽ với công nghiệp hóa hiện đại.","D. Không có các siêu đô thị trên 10 triệu dân."], ans:1},
+  {id:15, q:"Nguyên nhân chính dẫn đến hiện tượng đô thị hóa tự phát ở Mỹ Latinh là:", opts:["A. Công nghiệp ở các đô thị phát triển quá nóng.","B. Cuộc cải cách ruộng đất không triệt để khiến nông dân mất đất phải kéo ra thành phố tìm việc.","C. Chính sách cưỡng bức di dân của chính phủ.","D. Khí hậu vùng nông thôn quá lạnh giá."], ans:1},
+  {id:16, q:"Hai nền kinh tế có quy mô GDP lớn nhất khu vực Mỹ Latinh là:", opts:["A. Bra-xin và Mê-hi-cô.","B. Cu-ba và Chi-lê.","C. Pê-ru và Cô-lôm-bi-a.","D. Vê-nê-xu-ê-la và Ê-cu-a-đo."], ans:0},
+  {id:17, q:"Liên minh châu Âu (EU) có trụ sở chính đặt tại thành phố nào?", opts:["A. Pa-ri (Pháp).","B. Béc-lin (Đức).","C. Brúc-xen (Bỉ).","D. Rô-ma (I-ta-li-a)."], ans:2},
+  {id:18, q:"Tính đến sau sự kiện Brexit, Liên minh châu Âu (EU) có bao nhiêu quốc gia thành viên?", opts:["A. 25 quốc gia.","B. 27 quốc gia.","C. 28 quốc gia.","D. 30 quốc gia."], ans:1},
+  {id:19, q:"Bốn mặt hàng và yếu tố được tự do lưu thông trong thị trường chung châu Âu (EU) là:", opts:["A. Hàng hóa, con người, dịch vụ, tiền vốn.","B. Vũ khí, tài nguyên, lao động, thuế quan.","C. Nông sản, dầu mỏ, vàng bạc, bất động sản.","D. Hàng hóa, biên giới, quân đội, tiền tệ."], ans:0},
+  {id:20, q:"Việc đưa đồng tiền chung Ơ-rô (Euro) vào giao dịch trong EU KHÔNG mang lại lợi ích nào sau đây?", opts:["A. Xóa bỏ những rủi ro khi chuyển đổi tiền tệ.","B. Tạo thuận lợi cho việc chuyển giao vốn trong EU.","C. Đơn giản hóa công tác kế toán của các doanh nghiệp đa quốc gia.","D. Tăng thêm chi phí giao dịch ngoại hối giữa các nước thành viên."], ans:3},
+  {id:21, q:"Quốc gia có quy mô kinh tế (GDP) lớn nhất trong Liên minh châu Âu (EU) là:", opts:["A. Pháp.","B. Cộng hòa Liên bang Đức.","C. I-ta-li-a.","D. Tây Ban Nha."], ans:1},
+  {id:22, q:"Tổ hợp công nghiệp hàng không nổi tiếng thế giới do các nước thành viên EU hợp tác sản xuất là:", opts:["A. Boeing.","B. Airbus.","C. Lockheed Martin.","D. Bombardier."], ans:1},
+  {id:23, q:"Khu vực Đông Nam Á bao gồm hai bộ phận địa lí là:", opts:["A. Đông Nam Á lục địa và Đông Nam Á hải đảo.","B. Đông Nam Á phía Bắc và Đông Nam Á phía Nam.","C. Đông Nam Á ôn đới và Đông Nam Á nhiệt đới.","D. Đông Nam Á đồng bằng và Đông Nam Á cao nguyên."], ans:0},
+  {id:24, q:"Quốc gia duy nhất ở khu vực Đông Nam Á KHÔNG có đường biên giới giáp biển là:", opts:["A. Cam-pu-chia.","B. Mi-an-ma.","C. Lào.","D. Thái Lan."], ans:2},
+  {id:25, q:"Khí hậu chủ đạo của khu vực Đông Nam Á lục địa là:", opts:["A. Khí hậu xích đạo quanh năm nóng ẩm.","B. Khí hậu nhiệt đới gió mùa.","C. Khí hậu cận nhiệt đới khô.","D. Khí hậu ôn đới hải dương."], ans:1},
+  {id:26, q:"Cây lương thực truyền thống và quan trọng bậc nhất của khu vực Đông Nam Á là:", opts:["A. Lúa mì.","B. Ngô.","C. Lúa nước (lúa gạo).","D. Khoai tây."], ans:2},
+  {id:27, q:"Đông Nam Á là khu vực đứng đầu thế giới về sản lượng xuất khẩu các loại cây công nghiệp nhiệt đới nào?", opts:["A. Cao su, cà phê, hồ tiêu, cọ dầu.","B. Củ cải đường, bông vải, đậu tương.","C. Nho, ô liu, cam chanh.","D. Lúa mạch, hướng dương, táo."], ans:0},
+  {id:28, q:"Hiệp hội các quốc gia Đông Nam Á (ASEAN) được thành lập vào năm nào tại Băng Cốc (Thái Lan)?", opts:["A. Năm 1965.","B. Năm 1967.","C. Năm 1975.","D. Năm 1995."], ans:1},
+  {id:29, q:"Việt Nam chính thức gia nhập Hiệp hội các quốc gia Đông Nam Á (ASEAN) vào năm nào?", opts:["A. Năm 1986.","B. Năm 1992.","C. Năm 1995.","D. Năm 1999."], ans:2},
+  {id:30, q:"Cộng đồng ASEAN (AC) được xây dựng dựa trên 3 trụ cột chính là:", opts:["A. Chính trị - An ninh, Kinh tế, Văn hóa - Xã hội.","B. Quân sự, Tài chính, Môi trường.","C. Nông nghiệp, Công nghiệp, Dịch vụ.","D. Thương mại, Đầu tư, Du lịch."], ans:0},
+  {id:31, q:"Khu vực Tây Nam Á nằm ở vị trí ngã ba tiếp giáp giữa 3 châu lục nào?", opts:["A. Châu Á, Châu Âu, Châu Phi.","B. Châu Á, Châu Âu, Châu Mỹ.","C. Châu Á, Châu Phi, Châu Đại Dương.","D. Châu Âu, Châu Phi, Châu Mỹ."], ans:0},
+  {id:32, q:"Tài nguyên khoáng sản có trữ lượng lớn nhất và quyết định vị thế kinh tế của khu vực Tây Nam Á là:", opts:["A. Than đá và quặng sắt.","B. Dầu mỏ và khí tự nhiên (chiếm hơn 50% trữ lượng thế giới).","C. Kim cương và vàng.","D. Bô-xít và đồng."], ans:1},
+  {id:33, q:"Khí hậu của phần lớn diện tích khu vực Tây Nam Á có đặc điểm là:", opts:["A. Nóng ẩm, mưa nhiều quanh năm.","B. Khô hạn, nóng khắc nghiệt, cảnh quan hoang mạc và bán hoang mạc chiếm ưu thế.","C. Lạnh giá quanh năm, băng tuyết bao phủ.","D. Ôn hòa, mát mẻ quanh năm."], ans:1},
+  {id:34, q:"Phần lớn cư dân khu vực Tây Nam Á theo tôn giáo nào?", opts:["A. Phật giáo.","B. Ấn Độ giáo.","C. Hồi giáo (Islam).","D. Chính thống giáo."], ans:2},
+  {id:35, q:"Khu vực tập trung trữ lượng dầu mỏ lớn nhất ở Tây Nam Á là:", opts:["A. Vùng ven Địa Trung Hải.","B. Vùng vịnh Péc-xích (Persian Gulf).","C. Vùng núi Cô-ca-dơ.","D. Vùng ven Biển Đen."], ans:1},
+  {id:36, q:"Phần lãnh thổ trung tâm Bắc Mỹ của Hoa Kỳ tiếp giáp với hai quốc gia nào?", opts:["A. Ca-na-đa (phía Bắc) và Mê-hi-cô (phía Nam).","B. Cu-ba và Bra-xin.","C. Nga và Đan Mạch.","D. Mê-hi-cô và Cô-lôm-bi-a."], ans:0},
+  {id:37, q:"Hai bang nằm tách biệt ngoài phần lãnh thổ trung tâm của Hoa Kỳ là:", opts:["A. California và Texas.","B. Alaska và Hawaii.","C. Florida và New York.","D. Washington và Nevada."], ans:1},
+  {id:38, q:"Địa hình phần lãnh thổ trung tâm Hoa Kỳ được chia thành 3 khu vực rõ rệt từ Tây sang Đông là:", opts:["A. Hệ thống Coóc-đi-e phía Tây → Đồng bằng trung tâm ở giữa → Dãy A-pa-lát và đồng bằng ven Đại Tây Dương phía Đông.","B. Dãy A-pa-lát phía Tây → Cao nguyên ở giữa → Hệ thống Coóc-đi-e phía Đông.","C. Đồng bằng ở hai rìa và núi cao ở chính giữa.","D. Toàn bộ là bình nguyên thấp phẳng."], ans:0},
+  {id:39, q:"Đặc điểm nổi bật về dân cư của Hoa Kỳ là:", opts:["A. Dân số giảm nhanh do không có người nhập cư.","B. Là quốc gia đa chủng tộc, đa văn hóa hình thành chủ yếu do quá trình nhập cư.","C. Dân cư phân bố đồng đều trên toàn lãnh thổ.","D. Tỉ lệ dân thành thị dưới 50%."], ans:1},
+  {id:40, q:"Xu hướng chuyển dịch phân bố dân cư ở Hoa Kỳ trong những thập niên gần đây là:", opts:["A. Từ vùng Đông Bắc chuyển dịch về vùng phía Nam và ven bờ Thái Bình Dương (Vành đai Mặt Trời).","B. Từ ven biển chuyển sâu vào vùng hoang mạc nội địa.","C. Từ vùng phía Nam chuyển lên bang Alaska.","D. Từ thành thị quay trở lại vùng nông thôn làm nông nghiệp."], ans:0},
+  {id:41, q:"Ngành kinh tế chiếm tỉ trọng lớn nhất trong cơ cấu GDP của Hoa Kỳ hiện nay là:", opts:["A. Nông - lâm - thủy sản.","B. Công nghiệp và xây dựng.","C. Dịch vụ (chiếm khoảng 80% GDP).","D. Khai thác khoáng sản."], ans:2},
+  {id:42, q:"Hình thức tổ chức sản xuất nông nghiệp chủ yếu và hiệu quả cao ở Hoa Kỳ là:", opts:["A. Hộ gia đình tự cung tự cấp.","B. Trang trại (Farm) có quy mô diện tích lớn, áp dụng cơ giới hóa và công nghệ cao.","C. Hợp tác xã thủ công.","D. Du canh du cư."], ans:1},
+  {id:43, q:"Các ngành công nghiệp hiện đại của Hoa Kỳ (hàng không vũ trụ, điện tử, tin học - Thung lũng Silicon) tập trung chủ yếu ở vùng nào?", opts:["A. Vùng Đông Bắc truyền thống.","B. Vùng phía Nam và ven Thái Bình Dương (Vành đai Mặt Trời).","C. Vùng núi đá Rocky.","D. Vùng bang Alaska."], ans:1},
+  {id:44, q:"Quốc gia có diện tích lãnh thổ lớn nhất thế giới (hơn 17 triệu km²), nằm trải dài trên cả hai châu lục Á - Âu là:", opts:["A. Ca-na-đa.","B. Trung Quốc.","C. Liên bang Nga.","D. Hoa Kỳ."], ans:2},
+  {id:45, q:"Dòng sông nào là ranh giới tự nhiên phân chia Liên bang Nga thành hai phần (phần phía Tây và phần phía Đông)?", opts:["A. Sông Vôn-ga (Volga).","B. Sông Ô-bi (Ob).","C. Sông I-ê-nít-xây (Yenisei).","D. Sông Lê-na (Lena)."], ans:2},
+  {id:46, q:"Dãy núi nào được coi là ranh giới tự nhiên giữa hai châu lục Á - Âu trên lãnh thổ Liên bang Nga?", opts:["A. Dãy Cáp-ca.","B. Dãy U-ran (Ural).","C. Dãy An-tai.","D. Dãy Xai-an."], ans:1},
+  {id:47, q:"Dòng sông được coi là biểu tượng của nước Nga, chảy trên đồng bằng Đông Âu và đổ vào biển Caspi là:", opts:["A. Sông Vôn-ga.","B. Sông Đôn.","C. Sông Ô-bi.","D. Sông A-mua."], ans:0},
+  {id:48, q:"Hồ nước ngọt sâu nhất thế giới nằm ở phần phía Nam Xi-bia của Liên bang Nga là:", opts:["A. Hồ Victoria.","B. Hồ Thượng (Superior).","C. Hồ Bai-can (Baikal).","D. Hồ Ladoga."], ans:2},
+  {id:49, q:"Kiểu rừng chiếm diện tích lớn nhất ở Liên bang Nga (đứng đầu thế giới về diện tích rừng) là:", opts:["A. Rừng nhiệt đới ẩm.","B. Rừng lá kim (rừng Tai-ga).","C. Rừng lá rộng thường xanh.","D. Rừng ngập mặn ven biển."], ans:1},
+  {id:50, q:"Vấn đề dân số đáng lo ngại nhất của Liên bang Nga trong nhiều thập kỉ qua là:", opts:["A. Bùng nổ dân số quá nhanh.","B. Gia tăng tự nhiên âm hoặc rất thấp, dân số già hóa dẫn đến thiếu hụt lao động.","C. Mật độ dân số quá cao ở vùng Xi-bia.","D. Tỉ lệ biết chữ của người dân thấp."], ans:1},
+  {id:51, q:"Đại bộ phận dân cư của Liên bang Nga (khoảng 70%) tập trung sinh sống ở khu vực nào?", opts:["A. Vùng Viễn Đông.","B. Vùng Bắc Cực.","C. Phần lãnh thổ thuộc châu Âu (đồng bằng Đông Âu).","D. Cao nguyên Trung Xi-bia."], ans:2},
+  {id:52, q:"Ngành công nghiệp giữ vai trò mũi nhọn, mang lại nguồn thu ngoại tệ lớn nhất cho Liên bang Nga là:", opts:["A. Công nghiệp dệt may và da giày.","B. Công nghiệp khai thác dầu khí và năng lượng.","C. Công nghiệp chế biến thực phẩm.","D. Công nghiệp sản xuất đồ chơi."], ans:1},
+  {id:53, q:"Vùng kinh tế phát triển lâu đời nhất, tập trung thủ đô Mát-xcơ-va của Liên bang Nga là:", opts:["A. Vùng Trung ương.","B. Vùng U-ran.","C. Vùng Viễn Đông.","D. Vùng Tây Xi-bia."], ans:0},
+  {id:54, q:"Quần đảo Nhật Bản nằm ở khu vực nào của châu Á và gồm 4 đảo lớn nào?", opts:["A. Đông Á – gồm Hô-cai-đô, Hôn-su, Xi-cô-cư, Kiu-xiu.","B. Đông Nam Á – gồm Hôn-su, Gia-va, Xu-ma-tra, Kiu-xiu.","C. Nam Á – gồm Hô-cai-đô, Hôn-su, Đa-oai, Kiu-xiu.","D. Đông Bắc Á – chỉ gồm 2 đảo Hôn-su và Hô-cai-đô."], ans:0},
+  {id:55, q:"Đảo có diện tích lớn nhất (chiếm hơn 60% diện tích) và tập trung đông dân cư, kinh tế nhất của Nhật Bản là:", opts:["A. Đảo Hô-cai-đô.","B. Đảo Hôn-su (Honshu).","C. Đảo Xi-cô-cư.","D. Đảo Kiu-xiu."], ans:1},
+  {id:56, q:"Đặc điểm nổi bật về tài nguyên khoáng sản của Nhật Bản là:", opts:["A. Giàu có bậc nhất thế giới về dầu mỏ và sắt.","B. Nghèo tài nguyên khoáng sản, phần lớn nguyên nhiên liệu công nghiệp phải nhập khẩu.","C. Dồi dào trữ lượng bô-xít và kim cương.","D. Tự cung tự cấp được 100% năng lượng hóa thạch."], ans:1},
+  {id:57, q:"Vùng biển Nhật Bản có ngư trường cá lớn và phong phú bậc nhất thế giới là nhờ:", opts:["A. Nằm ở vùng xích đạo không có bão.","B. Nơi giao nhau của hai dòng biển nóng (Cư-rô-xi-ô) và dòng biển lạnh (Ô-ia-xi-ô).","C. Không có tàu thuyền qua lại.","D. Độ mặn của nước biển bằng không."], ans:1},
+  {id:58, q:"Khó khăn lớn nhất về mặt dân số đối với sự phát triển kinh tế - xã hội của Nhật Bản hiện nay là:", opts:["A. Tỉ lệ trẻ em quá cao gây áp lực giáo dục.","B. Tỉ lệ người cao tuổi (trên 65 tuổi) rất cao – già hóa dân số nghiêm trọng nhất thế giới.","C. Trình độ lao động thấp.","D. Tỉ lệ thất nghiệp lên tới 50%."], ans:1},
+  {id:59, q:"Các trung tâm công nghiệp lớn nhất của Nhật Bản tập trung chủ yếu ở đâu?", opts:["A. Vùng núi cao trung tâm đảo Hôn-su.","B. Ven biển Thái Bình Dương (Vành đai công nghiệp Thái Bình Dương).","C. Phía Bắc đảo Hô-cai-đô.","D. Vùng nội địa xa biển."], ans:1},
+  {id:60, q:"Địa hình Trung Quốc có đặc điểm phân hóa rõ rệt theo chiều từ Tây sang Đông như thế nào?", opts:["A. Cao ở phía Đông, thấp dần về phía Tây.","B. Cao ở phía Tây (núi cao, sơn nguyên đồ sộ) và thấp dần về phía Đông (đồng bằng châu thổ màu mỡ).","C. Đồng bằng bằng phẳng trên toàn bộ lãnh thổ.","D. Núi cao bao bọc xung quanh, ở giữa là biển nội địa."], ans:1},
+  {id:61, q:"Bốn đồng bằng lớn và trù phú ở miền Đông Trung Quốc từ Bắc xuống Nam lần lượt là:", opts:["A. Đông Bắc, Hoa Bắc, Hoa Trung, Hoa Nam.","B. Tây Tạng, Tân Cương, Hoa Bắc, Hoa Nam.","C. Côn Luân, Thiên Sơn, Đông Bắc, Hoa Trung.","D. Hoa Nam, Nội Mông, Vân Quý, Tứ Xuyên."], ans:0},
+  {id:62, q:"Đại bộ phận dân cư và các thành phố lớn của Trung Quốc tập trung ở miền Đông vì:", opts:["A. Miền Đông có địa hình núi đá hiểm trở dễ phòng thủ.","B. Miền Đông có các đồng bằng châu thổ màu mỡ, khí hậu gió mùa thuận lợi, giao thông và kinh tế phát triển.","C. Miền Đông giàu tài nguyên sa mạc.","D. Chính phủ cấm người dân sinh sống ở miền Đông."], ans:1},
+  {id:63, q:"Trung Quốc bắt đầu tiến hành công cuộc cải cách và mở cửa nền kinh tế từ năm nào?", opts:["A. Năm 1949.","B. Năm 1978.","C. Năm 1991.","D. Năm 2001."], ans:1},
+  {id:64, q:"Hiện nay, quy mô tổng sản phẩm trong nước (GDP) của Trung Quốc đứng vị trí thứ mấy trên thế giới?", opts:["A. Đứng thứ 1 thế giới.","B. Đứng thứ 2 thế giới (sau Hoa Kỳ).","C. Đứng thứ 3 thế giới.","D. Đứng thứ 5 thế giới."], ans:1},
+  {id:65, q:"Lục địa Ô-xtrây-li-a có cảnh quan tự nhiên nào chiếm diện tích lớn nhất?", opts:["A. Rừng mưa nhiệt đới rậm rạp.","B. Hoang mạc và bán hoang mạc (do đường Chí tuyến Nam đi qua giữa lãnh thổ và ảnh hưởng của địa hình, dòng biển lạnh).","C. Đồng rêu hàn đới.","D. Rừng lá kim ôn đới."], ans:1},
+  {id:66, q:"Dân cư và các đô thị lớn của Ô-xtrây-li-a (như Sydney, Melbourne) tập trung chủ yếu ở khu vực nào?", opts:["A. Vùng đồng bằng ven biển phía Đông Nam và Tây Nam.","B. Vùng hoang mạc trung tâm lục địa.","C. Vùng bờ biển phía Bắc khô nóng.","D. Vùng bồn địa Ác-tê-di-an."], ans:0},
+  {
+    id:67, q:"Ghép tên khu vực/quốc gia ở cột trái với đặc điểm kinh tế - tự nhiên tiêu biểu ở cột phải:",
+    table:[
+      ["1. Khu vực Tây Nam Á","a. Thị trường chung thống nhất, sử dụng đồng tiền chung Euro."],
+      ["1. Khu vực Tây Nam Á","b. Trữ lượng dầu mỏ chiếm hơn 50% thế giới, khí hậu khô hạn."],
+      ["2. Liên minh châu Âu (EU)","c. Khí hậu nhiệt đới ẩm, có rừng Amazon lớn nhất thế giới."],
+      ["2. Liên minh châu Âu (EU)","d. Tự do lưu thông hàng hóa, con người, dịch vụ, tiền vốn."]
+    ],
+    opts:["A. 1-bc, 2-ad.","B. 1-bd, 2-ac.","C. 1-ac, 2-bd.","D. 1-ab, 2-cd."],
+    ans:0,
+    note:"Đáp án chuẩn trong tổ hợp: Tây Nam Á đặc trưng bởi dầu mỏ (b), EU đặc trưng bởi thị trường chung Euro và 4 tự do lưu thông (a, d)."
+  },
+  {
+    id:68, q:"Ghép hai miền tự nhiên của Trung Quốc ở cột trái với đặc điểm tương ứng ở cột phải:",
+    table:[
+      ["1. Miền Đông Trung Quốc","a. Gồm các sơn nguyên đồ sộ (Tây Tạng) và bồn địa, khí hậu ôn đới lục địa khô hạn."],
+      ["1. Miền Đông Trung Quốc","b. Gồm các đồng bằng châu thổ màu mỡ, khí hậu gió mùa, dân cư đông đúc."],
+      ["2. Miền Tây Trung Quốc","c. Tập trung các trung tâm công nghiệp hiện đại và đặc khu kinh tế ven biển."],
+      ["2. Miền Tây Trung Quốc","d. Dân cư thưa thớt, kinh tế chủ yếu là chăn nuôi du mục và khai khoáng."]
+    ],
+    opts:["A. 1-ad, 2-bc.","B. 1-bc, 2-ad.","C. 1-ab, 2-cd.","D. 1-bd, 2-ac."],
+    ans:1
+  },
+  {
+    id:69, type:"tf",
+    q:"Khi nhận xét về tự nhiên và kinh tế khu vực Đông Nam Á, hãy xác định các mệnh đề dưới đây là Đúng hay Sai:",
+    items:[
+      {text:"1. Đông Nam Á nằm ở vị trí cầu nối giữa Ấn Độ Dương và Thái Bình Dương, giữa lục địa Á - Âu và lục địa Ô-xtrây-li-a.", ans:true},
+      {text:"2. Khí hậu nhiệt đới gió mùa và xích đạo tạo điều kiện thuận lợi để Đông Nam Á phát triển nền nông nghiệp nhiệt đới.", ans:true},
+      {text:"3. Tất cả 11 quốc gia trong khu vực Đông Nam Á đều có đường bờ biển dài và giàu tài nguyên biển.", ans:false},
+      {text:"4. Cơ cấu kinh tế của các nước Đông Nam Á đang chuyển dịch tích cực theo hướng giảm tỉ trọng nông nghiệp, tăng tỉ trọng công nghiệp và dịch vụ.", ans:true}
+    ],
+    note:"Ý 3 Sai vì Lào là quốc gia nội lục duy nhất ở Đông Nam Á không giáp biển."
+  },
+  {id:70, q:"Cơ cấu kinh tế của các nước đang phát triển nhìn chung đang chuyển dịch theo xu hướng …(1)… tỉ trọng ngành nông - lâm - ngư nghiệp, …(2)… tỉ trọng ngành công nghiệp và dịch vụ.", opts:["A. 1 – tăng; 2 – giảm.","B. 1 – giảm; 2 – tăng.","C. 1 – giữ nguyên; 2 – giảm.","D. 1 – tăng; 2 – giữ nguyên."], ans:1}
 ];
 
-const GEO_ESSAY = `
-<div class="card essay-box">
-  <h3>Tóm tắt Tự luận Địa Lý</h3>
-  <ul>
-    <li><b>Đặc điểm vị trí địa lí:</b> Nằm ở rìa phía đông bán đảo Đông Dương, trung tâm khu vực Đông Nam Á; là cầu nối giữa đất liền và đại dương, giữa các nước Đông Nam Á lục địa và hải đảo.</li>
-    <li><b>Thiên nhiên nhiệt đới ẩm gió mùa:</b> Khí hậu nhiệt đới với lượng mưa lớn (1500–2000mm/năm), độ ẩm >80%. Hoạt động của gió mùa Đông Bắc (mùa đông) và gió mùa Tây Nam (mùa hạ) tạo nên sự phân hóa mùa sắc nét.</li>
-    <li><b>Ảnh hưởng của Biển Đông:</b> Cung cấp lượng ẩm lớn, mang lại khí hậu ôn hòa, tài nguyên biển phong phú (dầu khí, hải sản, du lịch) nhưng cũng chịu thiên tai bão lụt thường xuyên.</li>
-  </ul>
-</div>`;
+// ==================== 3. DỮ LIỆU TỰ LUẬN CÓ Ô ĐIỀN ĐÁP ÁN & TỪ KHÓA CHẤM ====================
+const ESSAY_DATA = {
+  bio: [
+    {
+      id: "bio_e1",
+      title: "Câu 1 (Tự luận Sinh học 11): Hô hấp, lên men và bảo quản nông sản",
+      prompt: "Con đường hô hấp và lên men gồm những giai đoạn nào? Nguyên liệu và sản phẩm của từng giai đoạn là gì? Hãy nêu các biện pháp bảo quản nông sản mà em biết? Giải thích cơ sở khoa học của việc rau trong siêu thị được bảo quản trong túi nilon đục lỗ và để trong tủ mát?",
+      placeholder: "Nhập câu trả lời của bạn vào đây (gợi ý: nêu các giai đoạn đường phân, chu trình Krebs, chuỗi truyền electron, lên men, các cách bảo quản nông sản và giải thích việc bảo quản rau trong túi đục lỗ ở tủ mát)...",
+      keywords: ["đường phân", "krebs", "chuỗi truyền electron", "tế bào chất", "ti thể", "pyruvic", "atp", "lên men", "bảo quản khô", "bảo quản lạnh", "tủ mát", "độ ẩm", "đục lỗ"],
+      sampleHtml: `
+        <b>Đáp án chuẩn chi tiết:</b>
+        <ul>
+          <li><b>1. Con đường hô hấp hiếu khí (3 giai đoạn, khi có O₂):</b>
+            <br>• <i>Đường phân (Tế bào chất):</i> Nguyên liệu: 1 Glucose, 2 ATP, 2 ADP, 2 Pᵢ, 2 NAD⁺ → Sản phẩm: 2 Pyruvic acid, 2 ATP (thu nhận ròng), 2 NADH.
+            <br>• <i>Oxi hóa pyruvic acid & Chu trình Krebs (Chất nền ti thể):</i> Nguyên liệu: 2 Pyruvic acid, NAD⁺, FAD, ADP, Pᵢ, H₂O → Sản phẩm: 6 CO₂, 2 ATP, 8 NADH, 2 FADH₂.
+            <br>• <i>Chuỗi truyền electron hô hấp (Màng trong ti thể):</i> Nguyên liệu: 10 NADH, 2 FADH₂, O₂, ADP, Pᵢ → Sản phẩm: H₂O và 26–28 ATP (Tổng hô hấp hiếu khí tạo 30–32 hoặc 36–38 ATP).
+          </li>
+          <li><b>2. Con đường lên men (2 giai đoạn, tại tế bào chất khi thiếu O₂):</b>
+            <br>• <i>Đường phân:</i> 1 Glucose → 2 Pyruvic acid + 2 ATP + 2 NADH.
+            <br>• <i>Lên men:</i> 2 Pyruvic acid + 2 NADH → Ethanol + CO₂ (lên men rượu) hoặc Lactic acid (lên men lactic). Tổng chỉ thu được 2 ATP.
+          </li>
+          <li><b>3. Các biện pháp bảo quản nông sản:</b> Bảo quản khô (phơi/sấy hạt giảm độ ẩm), Bảo quản lạnh (để trong tủ mát, kho lạnh), Bảo quản trong điều kiện khí quyển biến đổi (tăng CO₂, giảm O₂, hút chân không).</li>
+          <li><b>4. Giải thích rau để trong túi nilon đục lỗ ở tủ mát:</b>
+            <br>• <i>Để trong tủ mát:</i> Hạ nhiệt độ làm giảm hoạt tính enzyme hô hấp → giảm tiêu hao chất hữu cơ và ức chế vi sinh vật gây hỏng.
+            <br>• <i>Túi nilon:</i> Giữ độ ẩm ổn định cho rau, chống thoát hơi nước làm rau héo.
+            <br>• <i>Đục lỗ:</i> Thoát bớt hơi nước ngưng tụ (tránh đọng nước gây thối nhũn) và cung cấp lượng O₂ vừa đủ để duy trì hô hấp hiếu khí tối thiểu, không chuyển sang lên men kị khí sinh chất độc.
+          </li>
+        </ul>`
+    },
+    {
+      id: "bio_e2",
+      title: "Câu 2 (Tự luận Sinh học 11): Quang hợp, thực vật C₃, C₄, CAM và trồng cây bằng đèn LED",
+      prompt: "Quang hợp là gì? Vai trò của quá trình quang hợp? Quá trình quang hợp gồm những pha nào? Nguyên liệu và sản phẩm của mỗi pha là gì? Tại sao lại gọi là thực vật C₃, C₄, CAM? Công nghệ trồng cây không cần ánh sáng mặt trời là gì? Hãy kể tên một số loại cây trồng được áp dụng công nghệ này?",
+      placeholder: "Nhập câu trả lời của bạn vào đây (gợi ý: khái niệm quang hợp, vai trò, pha sáng - pha tối, phân biệt C3/C4/CAM và công nghệ đèn LED)...",
+      keywords: ["lục lạp", "chất hữu cơ", "pha sáng", "pha tối", "thylakoid", "stroma", "nadph", "atp", "apg", "oaa", "khí khổng", "đèn led", "xà lách", "dâu tây"],
+      sampleHtml: `
+        <b>Đáp án chuẩn chi tiết:</b>
+        <ul>
+          <li><b>1. Khái niệm & Vai trò:</b> Quang hợp là quá trình lục lạp hấp thụ năng lượng ánh sáng để tổng hợp chất hữu cơ (C₆H₁₂O₆) từ CO₂ và H₂O, đồng thời giải phóng O₂. Vai trò: Cung cấp thức ăn cho sinh vật, nguyên liệu cho công nghiệp/dược liệu; chuyển hóa quang năng thành hóa năng; hấp thụ CO₂ và giải phóng O₂ điều hòa không khí.</li>
+          <li><b>2. Hai pha của quang hợp:</b>
+            <br>• <i>Pha sáng (Màng thylakoid):</i> Nguyên liệu (Ánh sáng, H₂O, ADP, Pᵢ, NADP⁺) → Sản phẩm (ATP, NADPH, O₂).
+            <br>• <i>Pha tối (Chất nền Stroma):</i> Nguyên liệu (CO₂, ATP, NADPH) → Sản phẩm (Hợp chất hữu cơ C₆H₁₂O₆, ADP, Pᵢ, NADP⁺).
+          </li>
+          <li><b>3. Tại sao gọi là thực vật C₃, C₄, CAM?</b>
+            <br>• <i>Thực vật C₃:</i> Sản phẩm cố định CO₂ đầu tiên là hợp chất 3 carbon (APG/PGA). VD: lúa, cam, bưởi, nhãn.
+            <br>• <i>Thực vật C₄:</i> Sản phẩm cố định CO₂ đầu tiên là hợp chất 4 carbon (OAA). VD: ngô, mía, rau dền.
+            <br>• <i>Thực vật CAM (họ Thuốc bỏng):</i> Nhóm cây mọng nước vùng khô hạn mở khí khổng vào ban đêm để nhận CO₂ (tạo chất 4C) và đóng khí khổng vào ban ngày để tiết kiệm nước. VD: xương rồng, thanh long, dứa.
+          </li>
+          <li><b>4. Công nghệ trồng cây không cần ánh sáng mặt trời:</b> Sử dụng hệ thống đèn LED nhân tạo (phổ ánh sáng đỏ và xanh tím) thay thế ánh sáng mặt trời, giúp kiểm soát tối ưu cường độ, quang phổ và thời gian chiếu sáng không phụ thuộc thời tiết. Áp dụng cho: xà lách, cải bó xôi, rau mầm, dâu tây, cà chua bi, dưa lưới, hoa lan cấy mô, sâm Ngọc Linh.</li>
+        </ul>`
+    }
+  ],
+  geo: [
+    {
+      id: "geo_e1",
+      title: "Câu 1 (Tự luận Địa lý 11): Toàn cầu hóa kinh tế và ảnh hưởng đối với các nước đang phát triển",
+      prompt: "Trình bày các biểu hiện chủ yếu của toàn cầu hóa kinh tế? Phân tích những cơ hội và thách thức của toàn cầu hóa kinh tế đối với các nước đang phát triển (trong đó có Việt Nam)?",
+      placeholder: "Nhập câu trả lời của bạn vào đây (gợi ý: nêu các biểu hiện về thương mại, đầu tư, tài chính, công ty xuyên quốc gia; cơ hội và thách thức)...",
+      keywords: ["thương mại", "đầu tư", "công ty xuyên quốc gia", "tài chính", "vốn", "công nghệ", "thị trường", "giàu nghèo", "môi trường", "cạnh tranh", "bản sắc"],
+      sampleHtml: `
+        <b>Đáp án chuẩn chi tiết:</b>
+        <ul>
+          <li><b>1. Các biểu hiện của toàn cầu hóa kinh tế:</b>
+            <br>• Thương mại thế giới phát triển mạnh, tốc độ tăng trưởng thương mại luôn cao hơn tốc độ tăng trưởng kinh tế.
+            <br>• Đầu tư nước ngoài (FDI) tăng nhanh, đặc biệt ưu tiên vào lĩnh vực dịch vụ, công nghệ cao.
+            <br>• Thị trường tài chính quốc tế mở rộng với mạng lưới liên kết toàn cầu (IMF, WB).
+            <br>• Các công ty xuyên quốc gia (TNCs) có vai trò ngày càng lớn, chi phối nhiều chuỗi cung ứng.
+          </li>
+          <li><b>2. Cơ hội đối với các nước đang phát triển:</b> Thu hút nguồn vốn đầu tư (FDI), tiếp nhận khoa học - công nghệ hiện đại và kinh nghiệm quản lí; mở rộng thị trường xuất khẩu hàng hóa; thúc đẩy chuyển dịch cơ cấu kinh tế và tạo việc làm.</li>
+          <li><b>3. Thách thức đối với các nước đang phát triển:</b> Gia tăng khoảng cách giàu nghèo; áp lực cạnh tranh gay gắt cho doanh nghiệp nội địa; nguy cơ trở thành bãi thải công nghệ lạc hậu gây ô nhiễm môi trường; nguy cơ mai một bản sắc văn hóa dân tộc và phụ thuộc kinh tế.</li>
+        </ul>`
+    },
+    {
+      id: "geo_e2",
+      title: "Câu 2 (Tự luận Địa lý 11): Điều kiện tự nhiên khu vực Đông Nam Á đối với phát triển kinh tế",
+      prompt: "Phân tích những thuận lợi và khó khăn của vị trí địa lí và điều kiện tự nhiên khu vực Đông Nam Á đối với sự phát triển kinh tế - xã hội?",
+      placeholder: "Nhập câu trả lời của bạn vào đây (gợi ý: vị trí cầu nối, khí hậu nhiệt đới gió mùa, đồng bằng phù sa, tài nguyên biển, khoáng sản và thiên tai bão lũ, động đất)...",
+      keywords: ["cầu nối", "hàng hải", "nhiệt đới gió mùa", "lúa nước", "cây công nghiệp", "phù sa", "dầu mỏ", "kinh tế biển", "bão", "lũ lụt", "động đất", "núi lửa"],
+      sampleHtml: `
+        <b>Đáp án chuẩn chi tiết:</b>
+        <ul>
+          <li><b>1. Thuận lợi:</b>
+            <br>• <i>Vị trí địa lí:</i> Nằm trên tuyến đường hàng hải quốc tế huyết mạch nối Thái Bình Dương và Ấn Độ Dương, cầu nối lục địa Á - Âu với Ô-xtrây-li-a → thuận lợi giao thương quốc tế.
+            <br>• <i>Khí hậu & Đất đai:</i> Khí hậu nhiệt đới ẩm gió mùa và xích đạo nóng ẩm quanh năm kết hợp với đất phù sa màu mỡ ở các đồng bằng châu thổ (sông Mê Công, sông Hồng, sông Mê Nam) và đất đỏ bazan → phát triển nền nông nghiệp nhiệt đới (lúa nước, cao su, cà phê, hồ tiêu, cọ dầu).
+            <br>• <i>Tài nguyên biển & Khoáng sản:</i> Vùng biển rộng lớn giàu hải sản, dầu khí, du lịch biển và cảng biển (trừ Lào); giàu khoáng sản như dầu mỏ, khí tự nhiên, thiếc, đồng, than đá.
+          </li>
+          <li><b>2. Khó khăn:</b>
+            <br>• Nằm trong vành đai lửa Thái Bình Dương và vùng nhiệt đới gió mùa nên thường xuyên chịu thiên tai: bão nhiệt đới, lũ lụt, hạn hán, động đất, núi lửa và sóng thần.
+            <br>• Địa hình bị chia cắt mạnh bởi các dãy núi và quần đảo gây trở ngại cho giao thông đường bộ liên vùng.
+          </li>
+        </ul>`
+    }
+  ]
+};
 
-// ==================== ĐIỀU KHIỂN LOGIC ỨNG DỤNG ====================
-let currentSubject = 'bio'; // 'bio' hoặc 'geo'
+// ==================== 4. LOGIC XỬ LÝ TRANG WEB ====================
+let currentSubject = 'bio';
 let currentList = [...BIO_QUESTIONS];
 let userAnswers = {};
 let mode = 'instant';
@@ -313,19 +567,14 @@ function switchSubject(sub) {
 
   if (sub === 'bio') {
     currentList = [...BIO_QUESTIONS];
-    document.getElementById('header-title').textContent = "🌿 Ôn Tập Sinh Học 11 (70 Câu)";
+    document.getElementById('header-title').textContent = "🌸 Ôn Tập Sinh Học 11 (70 Câu Trắc Nghiệm & Tự Luận)";
   } else {
     currentList = [...GEO_QUESTIONS];
-    document.getElementById('header-title').textContent = "🌍 Ôn Tập Địa Lý";
+    document.getElementById('header-title').textContent = "🌸 Ôn Tập Địa Lý 11 (70 Câu Trắc Nghiệm & Tự Luận)";
   }
 
-  // Ẩn bảng tự luận nếu đang mở
-  document.getElementById('essay-area').style.display = 'none';
-  document.getElementById('quiz-area').style.display = 'block';
-  document.getElementById('nav-grid').style.display = 'grid';
-  document.getElementById('tab-essay').classList.remove('active');
-
   renderAll();
+  renderEssayArea();
 }
 
 function renderAll() {
@@ -346,7 +595,7 @@ function renderAll() {
     card.className = 'card';
     card.id = `card-${item.id}`;
 
-    let html = `<div class="q-title"><span class="q-num">Câu ${item.id}.</span>${item.q}</div>`;
+    let html = `<div class="q-title"><span class="q-num">Câu ${item.id}</span>${item.q}</div>`;
 
     if (item.table) {
       html += `<table class="sub-table"><thead><tr><th>Cột trái</th><th>Cột phải</th></tr></thead><tbody>`;
@@ -378,6 +627,78 @@ function renderAll() {
   });
 
   updateUI();
+}
+
+function renderEssayArea() {
+  const container = document.getElementById('essay-area');
+  const list = ESSAY_DATA[currentSubject];
+  container.innerHTML = '';
+
+  list.forEach((item) => {
+    const savedText = localStorage.getItem(`essay_${item.id}`) || '';
+    const card = document.createElement('div');
+    card.className = 'essay-card';
+    card.innerHTML = `
+      <div class="essay-header">🌸 ${item.title}</div>
+      <div class="essay-prompt"><b>Đề bài:</b> ${item.prompt}</div>
+      <textarea class="essay-textarea" id="input-${item.id}" placeholder="${item.placeholder}" oninput="saveEssayDraft('${item.id}')">${savedText}</textarea>
+      <div class="essay-actions">
+        <button class="btn btn-primary" onclick="checkEssay('${item.id}')">✨ Chấm theo ý chính (Từ khóa)</button>
+        <button class="btn btn-outline" onclick="toggleSample('${item.id}')">📖 Ẩn / Hiện đáp án mẫu</button>
+        <button class="btn btn-danger" onclick="clearEssay('${item.id}')">🗑️ Xóa bài viết</button>
+      </div>
+      <div class="essay-feedback" id="fb-${item.id}"></div>
+      <div class="essay-sample" id="sp-${item.id}">${item.sampleHtml}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function saveEssayDraft(eId) {
+  const val = document.getElementById(`input-${eId}`).value;
+  localStorage.setItem(`essay_${eId}`, val);
+}
+
+function clearEssay(eId) {
+  document.getElementById(`input-${eId}`).value = '';
+  localStorage.removeItem(`essay_${eId}`);
+  document.getElementById(`fb-${eId}`).className = 'essay-feedback';
+}
+
+function toggleSample(eId) {
+  const sp = document.getElementById(`sp-${eId}`);
+  sp.classList.toggle('show');
+}
+
+function checkEssay(eId) {
+  const list = ESSAY_DATA[currentSubject];
+  const item = list.find(x => x.id === eId);
+  const text = (document.getElementById(`input-${eId}`).value || '').toLowerCase();
+  const fb = document.getElementById(`fb-${eId}`);
+
+  if (!text.trim()) {
+    fb.className = 'essay-feedback show';
+    fb.innerHTML = '⚠️ Bạn hãy gõ câu trả lời vào ô trống phía trên trước khi bấm chấm điểm nhé!';
+    return;
+  }
+
+  let matched = [];
+  let missed = [];
+  item.keywords.forEach(kw => {
+    if (text.includes(kw.toLowerCase())) matched.push(kw);
+    else missed.push(kw);
+  });
+
+  const ratio = Math.round((matched.length / item.keywords.length) * 100);
+  let html = `<div><b>Kết quả dò ý chính:</b> Đạt <b>${matched.length}/${item.keywords.length}</b> từ khóa trọng tâm (<b>${ratio}%</b>).</div>`;
+  if (matched.length > 0) {
+    html += `<div style="margin-top:6px;">✅ <b>Ý đã nêu được:</b> ` + matched.map(k => `<span class="kw-tag kw-ok">${k}</span>`).join('') + `</div>`;
+  }
+  if (missed.length > 0) {
+    html += `<div style="margin-top:6px;">💡 <b>Từ khóa nên bổ sung thêm:</b> ` + missed.map(k => `<span class="kw-tag kw-miss">${k}</span>`).join('') + `</div>`;
+  }
+  fb.className = 'essay-feedback show';
+  fb.innerHTML = html;
 }
 
 function selectOpt(qId, oIdx) {
@@ -449,7 +770,7 @@ function updateUI() {
       });
       if (showResult && status !== null && status !== 'partial') {
         exp.className = 'explain show';
-        exp.innerHTML = `<b>Đáp án chuẩn:</b> 1-Đúng, 2-Đúng, 3-Sai, 4-Đúng. ${item.note || ''}`;
+        exp.innerHTML = `<b>🌸 Đáp án chuẩn:</b> 1-Đúng, 2-Đúng, 3-Sai, 4-Đúng. ${item.note || ''}`;
       } else {
         exp.className = 'explain';
       }
@@ -470,7 +791,7 @@ function updateUI() {
       if (showResult && ua !== undefined) {
         exp.className = 'explain show';
         const letter = ['A','B','C','D'][item.ans];
-        exp.innerHTML = `<b>Đáp án đúng: ${letter}</b>${item.note ? ' — ' + item.note : ''}`;
+        exp.innerHTML = `<b>🌸 Đáp án đúng: ${letter}</b>${item.note ? ' — ' + item.note : ''}`;
       } else {
         exp.className = 'explain';
       }
@@ -489,6 +810,12 @@ function setMode(m) {
   document.getElementById('mode-instant').classList.toggle('active', m === 'instant');
   document.getElementById('mode-exam').classList.toggle('active', m === 'exam');
   document.getElementById('btn-submit').style.display = (m === 'exam') ? 'inline-block' : 'none';
+
+  // Nếu đang ở tab tự luận thì chuyển về tab trắc nghiệm
+  document.getElementById('essay-area').style.display = 'none';
+  document.getElementById('quiz-area').style.display = 'block';
+  document.getElementById('nav-grid').style.display = 'grid';
+  document.getElementById('tab-essay').classList.remove('active');
   updateUI();
 }
 
@@ -530,10 +857,6 @@ function toggleEssay() {
   const btn = document.getElementById('tab-essay');
   const showingEssay = essay.style.display === 'block';
 
-  if (!showingEssay) {
-    essay.innerHTML = (currentSubject === 'bio') ? BIO_ESSAY : GEO_ESSAY;
-  }
-
   essay.style.display = showingEssay ? 'none' : 'block';
   quiz.style.display = showingEssay ? 'block' : 'none';
   grid.style.display = showingEssay ? 'grid' : 'none';
@@ -541,6 +864,7 @@ function toggleEssay() {
 }
 
 renderAll();
+renderEssayArea();
 </script>
 </body>
 </html>
