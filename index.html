@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Ôn Tập Sinh Học 11 - 70 Câu</title>
+  <title>Quiz Ôn Tập Đa Môn - Sinh Học 11 & Địa Lý</title>
   <style>
     :root {
       --primary: #1b365d;
@@ -30,6 +30,21 @@
     h1 { font-size: 1.2rem; }
     .stats { display: flex; gap: 10px; font-size: 0.9rem; flex-wrap: wrap; }
     .badge { background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 6px; font-weight: 600; }
+    
+    /* Thanh chọn môn học */
+    .subject-bar {
+      background: #0f172a; padding: 10px 20px; text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .sub-select-btn {
+      padding: 6px 16px; border-radius: 20px; border: 1px solid #475569;
+      background: #1e293b; color: #cbd5e1; font-weight: 600; cursor: pointer;
+      margin: 0 5px; transition: 0.2s; font-size: 0.9rem;
+    }
+    .sub-select-btn.active {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+    }
+
     .toolbar {
       max-width: 960px; margin: 16px auto; padding: 0 16px;
       display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center;
@@ -103,7 +118,7 @@
 
 <header>
   <div class="header-inner">
-    <h1>🌿 Ôn Tập Sinh Học 11 (70 Câu Trắc Nghiệm & Tự Luận)</h1>
+    <h1 id="header-title">🌿 Ôn Tập Sinh Học 11 (70 Câu)</h1>
     <div class="stats">
       <span class="badge" id="stat-done">Đã làm: 0/70</span>
       <span class="badge" id="stat-correct">Đúng: 0</span>
@@ -112,11 +127,17 @@
   </div>
 </header>
 
+<!-- THANH CHUYỂN ĐỔI MÔN HỌC -->
+<div class="subject-bar">
+  <button class="sub-select-btn active" id="btn-sub-bio" onclick="switchSubject('bio')">🧬 Sinh Học 11</button>
+  <button class="sub-select-btn" id="btn-sub-geo" onclick="switchSubject('geo')">🌍 Địa Lý</button>
+</div>
+
 <div class="toolbar">
   <div style="display:flex; gap:6px; flex-wrap:wrap;">
     <button class="btn btn-outline active" id="mode-instant" onclick="setMode('instant')">⚡ Luyện tập (Biết đáp án ngay)</button>
     <button class="btn btn-outline" id="mode-exam" onclick="setMode('exam')">📝 Thi thử (Nộp bài mới chấm)</button>
-    <button class="btn btn-outline" id="tab-essay" onclick="toggleEssay()">📖 Xem 2 câu Tự luận</button>
+    <button class="btn btn-outline" id="tab-essay" onclick="toggleEssay()">📖 Xem Tự luận / Tóm tắt</button>
   </div>
   <div style="display:flex; gap:6px; flex-wrap:wrap;">
     <button class="btn btn-primary" onclick="shuffleQuestions()">🔀 Đảo câu hỏi</button>
@@ -129,36 +150,12 @@
 <div class="container">
   <div class="q-grid" id="nav-grid"></div>
   <div id="quiz-area"></div>
-  <div id="essay-area" style="display:none;">
-    <div class="card essay-box">
-      <h3>Câu 1 (Tự luận): Hô hấp, lên men và bảo quản nông sản</h3>
-      <ul>
-        <li><b>Hô hấp hiếu khí (có O₂ - 3 giai đoạn):</b>
-          <br>1. <i>Đường phân (Tế bào chất):</i> 1 Glucose → 2 Pyruvic acid + 2 ATP + 2 NADH.
-          <br>2. <i>Oxi hóa pyruvic acid & Chu trình Krebs (Chất nền ti thể):</i> 2 Pyruvic acid → 6 CO₂ + 2 ATP + 8 NADH + 2 FADH₂.
-          <br>3. <i>Chuỗi truyền electron (Màng trong ti thể):</i> 10 NADH + 2 FADH₂ + O₂ → H₂O + 26–28 ATP (Tổng: 30–32 hoặc 36–38 ATP).
-        </li>
-        <li><b>Lên men (thiếu O₂ - 2 giai đoạn tại tế bào chất):</b> Đường phân (tạo 2 Pyruvic acid + 2 ATP) → Lên men tạo Ethanol + CO₂ (lên men rượu) hoặc Lactic acid (lên men lactic). Tổng chỉ thu được 2 ATP.</li>
-        <li><b>Các biện pháp bảo quản nông sản:</b> Bảo quản khô (phơi/sấy hạt), bảo quản lạnh (tủ mát/kho lạnh), bảo quản trong khí quyển biến đổi (tăng CO₂, giảm O₂, hút chân không).</li>
-        <li><b>Vì sao rau siêu thị để trong túi nilon đục lỗ ở tủ mát?</b> Tủ mát hạ nhiệt độ giúp giảm hoạt tính enzyme hô hấp (giảm tiêu hao chất hữu cơ) và ức chế vi sinh vật; túi nilon giữ độ ẩm chống héo; lỗ đục giúp thoát hơi nước ngưng tụ tránh thối nhũn và cung cấp một lượng O₂ vừa đủ để duy trì hô hấp hiếu khí tối thiểu, tránh lên men kị khí làm hỏng rau.</li>
-      </ul>
-      <hr style="margin:14px 0; border:none; border-top:1px solid #cbd5e1;">
-      <h3>Câu 2 (Tự luận): Quang hợp, thực vật C₃, C₄, CAM và trồng cây không cần ánh sáng mặt trời</h3>
-      <ul>
-        <li><b>Khái niệm & Vai trò:</b> Quang hợp là quá trình lục lạp hấp thụ năng lượng ánh sáng tổng hợp chất hữu cơ (C₆H₁₂O₆) từ CO₂ và H₂O, giải phóng O₂. Vai trò: Cung cấp thức ăn, nguyên liệu công nghiệp/dược liệu, chuyển quang năng thành hóa năng, hấp thụ CO₂ và giải phóng O₂ điều hòa không khí.</li>
-        <li><b>Hai pha của quang hợp:</b>
-          <br>- <i>Pha sáng (Màng thylakoid):</i> Nguyên liệu (Ánh sáng, H₂O, ADP, Pᵢ, NADP⁺) → Sản phẩm (ATP, NADPH, O₂).
-          <br>- <i>Pha tối (Chất nền Stroma):</i> Nguyên liệu (CO₂, ATP, NADPH) → Sản phẩm (C₆H₁₂O₆, ADP, Pᵢ, NADP⁺).
-        </li>
-        <li><b>Tại sao gọi là C₃, C₄, CAM?</b> Thực vật C₃ có sản phẩm cố định CO₂ đầu tiên là chất 3 carbon (APG/PGA - VD: cam, bưởi, nhãn, lúa); thực vật C₄ có sản phẩm đầu tiên là chất 4 carbon (OAA - VD: mía, ngô, rau dền); thực vật CAM (họ Thuốc bỏng) mở khí khổng ban đêm nhận CO₂ tạo chất 4C và đóng khí khổng ban ngày để tiết kiệm nước (VD: xương rồng, thanh long, dứa).</li>
-        <li><b>Công nghệ trồng cây không cần ánh sáng mặt trời:</b> Dùng đèn LED nông nghiệp (cung cấp tia đỏ và xanh tím) thay ánh sáng mặt trời để điều chỉnh chính xác quang phổ, cường độ và thời gian chiếu sáng. Áp dụng cho: xà lách, cải bó xôi, rau mầm, dâu tây, cà chua bi, dưa lưới, hoa lan cấy mô, sâm Ngọc Linh.</li>
-      </ul>
-    </div>
-  </div>
+  <div id="essay-area" style="display:none;"></div>
 </div>
 
 <script>
-const QUESTIONS = [
+// ==================== DỮ LIỆU MÔN SINH HỌC 11 ====================
+const BIO_QUESTIONS = [
   {id:1, q:"Rễ cây hấp thụ những chất nào?", opts:["A. Nước cùng các ion khoáng.","B. Nước cùng các chất dinh dưỡng.","C. Nước và các chất khí.","D. O₂ và các chất dinh dưỡng hòa tan trong nước."], ans:0},
   {id:2, q:"Bộ phận hút nước chủ yếu của cây ở trên cạn là", opts:["A. lá, thân, rễ.","B. lá, thân.","C. rễ, thân.","D. Rễ."], ans:3},
   {id:3, q:"Nước và ion khoáng được hấp thụ vào mạch gỗ của rễ qua con đường nào?", opts:["A. Con đường qua thành tế bào - không bào.","B. Con đường qua chất nguyên sinh – gian bào.","C. Con đường qua không bào – gian bào.","D. Con đường qua chất nguyên sinh – không bào."], ans:1, note:"Gồm 2 con đường: gian bào và tế bào chất (chất nguyên sinh)."},
@@ -226,8 +223,7 @@ const QUESTIONS = [
   {id:65, q:"Quá trình lên men và hô hấp hiếu khí có giai đoạn chung là:", opts:["A. chuỗi chuyền êlectron.","B. chu trình Crep.","C. đường phân.","D. tổng hợp Axetyl – CoA."], ans:2},
   {id:66, q:"Quá trình hô hấp có liên quan chặt chẽ với nhân tố nhiệt độ vì:", opts:["A. nhiệt độ ảnh hưởng đến cơ chế đóng mở khí khổng ảnh hưởng đến nồng độ oxi.","B. nhiệt độ ảnh hưởng đến lượng nước là nguyên liệu của hô hấp.","C. mỗi loài chỉ hô hấp trong điều kiện nhiệt độ nhất định.","D. hô hấp bao gồm các phản ứng hóa học cần sự xúc tác của enzim, nên phụ thuộc chặt chẽ vào nhiệt độ."], ans:3},
   {
-    id:67,
-    q:"Ghép nội dung ở cột bên phải với nội dung ở cột bên trái để trở thành một câu có nội dung đúng về vận chuyển các chất trong cây:",
+    id:67, q:"Ghép nội dung ở cột bên phải với cột bên trái về vận chuyển các chất trong cây:",
     table:[
       ["1. Dòng mạch gỗ","a. Động lực là lực đẩy (áp suất rễ), lực hút (thoát hơi nước ở lá), lực liên kết của nước."],
       ["1. Dòng mạch gỗ","b. Động lực là chênh lệch gradient nồng độ các chất."],
@@ -238,8 +234,7 @@ const QUESTIONS = [
     ans:2
   },
   {
-    id:68,
-    q:"Ghép nội dung ở cột bên phải với nội dung ở cột bên trái để trở thành một câu có nội dung đúng về thoát hơi nước ở lá:",
+    id:68, q:"Ghép nội dung ở cột bên phải với cột bên trái về thoát hơi nước ở lá:",
     table:[
       ["1. Qua bề mặt lá","a. Tốc độ nhanh, được điều chỉnh."],
       ["1. Qua bề mặt lá","b. Ảnh hưởng bởi độ tuổi của lá, điều kiện sống,..."],
@@ -250,8 +245,7 @@ const QUESTIONS = [
     ans:1
   },
   {
-    id:69,
-    type:"tf",
+    id:69, type:"tf",
     q:"Rễ cây trên cạn bị ngập úng lâu ngày có thể chết vì nhiều lí do. Trong các lí do dưới đây, lí do nào đúng, lí do nào sai?",
     items:[
       {text:"1. Lông hút bị chết, rễ bị thối.", ans:true},
@@ -259,15 +253,80 @@ const QUESTIONS = [
       {text:"3. Rễ cây hấp thụ quá nhiều nước, bị trương phình và hỏng.", ans:false},
       {text:"4. Rễ cây bị thiếu oxygen, không hô hấp tạo đủ năng lượng để hút khoáng chủ động.", ans:true}
     ],
-    note:"Ý 3 Sai vì khi ngập úng thiếu O₂, rễ không hô hấp được nên mất áp suất thẩm thấu và không hút được nước (hạn sinh lí)."
+    note:"Ý 3 Sai vì ngập úng thiếu O₂, rễ mất năng lượng hút nước dẫn đến héo (hạn sinh lí)."
   },
-  {id:70, q:"Hấp thụ khoáng theo cơ chế chủ động là ion khoáng từ đất xâm nhập vào rễ cây …(1)… nồng độ, …(2)… ATP. Các từ/cụm từ cần điền vào vị trí (1), (2) lần lượt là:", opts:["A. 1 – cùng chiều; 2 – không tiêu tốn.","B. 1 – cùng chiều; 2 – tiêu tốn.","C. 1 – ngược chiều; 2 – không tiêu tốn.","D. 1 – ngược chiều; 2 – tiêu tốn."], ans:3}
+  {id:70, q:"Hấp thụ khoáng theo cơ chế chủ động là ion khoáng từ đất xâm nhập vào rễ cây …(1)… nồng độ, …(2)… ATP.", opts:["A. 1 – cùng chiều; 2 – không tiêu tốn.","B. 1 – cùng chiều; 2 – tiêu tốn.","C. 1 – ngược chiều; 2 – không tiêu tốn.","D. 1 – ngược chiều; 2 – tiêu tốn."], ans:3}
 ];
 
-let currentList = [...QUESTIONS];
+const BIO_ESSAY = `
+<div class="card essay-box">
+  <h3>Tóm tắt Tự luận Sinh Học 11</h3>
+  <ul>
+    <li><b>Hô hấp hiếu khí (3 giai đoạn):</b> Đường phân (tế bào chất) → Oxi hóa pyruvic acid & Chu trình Krebs (chất nền ti thể) → Chuỗi truyền electron (màng trong ti thể). Tổng thu 30–38 ATP.</li>
+    <li><b>Lên men (thiếu O₂):</b> Đường phân + Lên men rượu (ethanol + CO₂) hoặc Lên men lactic. Chỉ thu 2 ATP.</li>
+    <li><b>Bảo quản nông sản:</b> Bảo quản khô (phơi/sấy hạt), bảo quản lạnh (tủ mát), bảo quản khí quyển biến đổi (CO₂ cao, O₂ thấp).</li>
+    <li><b>Rau trong túi nilon đục lỗ ở tủ mát:</b> Tủ mát giảm hoạt tính enzyme hô hấp và ức chế vi sinh vật; túi nilon giữ ẩm chống héo; lỗ đục giúp thoát hơi nước ngưng tụ (tránh thối nhũn) và cung cấp O₂ duy trì hô hấp hiếu khí tối thiểu.</li>
+    <li><b>Quang hợp:</b> Lục lạp dùng ánh sáng tổng hợp C₆H₁₂O₆ từ CO₂ và H₂O, giải phóng O₂. Pha sáng (màng tilacôit) tạo ATP, NADPH, O₂; Pha tối (strôma) cố định CO₂.</li>
+    <li><b>Phân biệt C₃, C₄, CAM:</b> C₃ sản phẩm đầu tiên là 3C (APG/PGA); C₄ sản phẩm đầu tiên là 4C (OAA); CAM (mọng nước) mở khí khổng ban đêm nhận CO₂ và đóng ban ngày để tiết kiệm nước.</li>
+    <li><b>Trồng cây không cần ánh sáng mặt trời:</b> Dùng đèn LED nông nghiệp (đỏ và xanh tím) thay ánh sáng mặt trời, tối ưu hóa sinh trưởng, không phụ thuộc thời tiết.</li>
+  </ul>
+</div>`;
+
+// ==================== DỮ LIỆU MÔN ĐỊA LÝ (MẪU 10 CÂU, BẠN CÓ THỂ BỔ SUNG THÊM) ====================
+const GEO_QUESTIONS = [
+  {id:1, q:"Việt Nam nằm ở khu vực nào của châu Á?", opts:["A. Tây Á.","B. Nam Á.","C. Đông Nam Á.","D. Trung Á."], ans:2},
+  {id:2, q:"Điểm cực Bắc phần đất liền của nước ta thuộc tỉnh nào?", opts:["A. Hà Giang.","B. Lạng Sơn.","C. Cao Bằng.","D. Lào Cai."], ans:0},
+  {id:3, q:"Đặc điểm nào sau đây không phải của thiên nhiên nhiệt đới ẩm gió mùa nước ta?", opts:["A. Lượng mưa lớn, độ ẩm cao.","B. Khí hậu có 4 mùa rõ rệt ở mọi miền.","C. Gió mùa thao túng khí hậu.","D. Địa hình xâm lấn mạnh vùng đồi núi."], ans:1, note:"Nước ta chỉ có miền Bắc là có 4 mùa rõ rệt, miền Nam chỉ có 2 mùa mưa - khô."},
+  {id:4, q:"Hệ sinh thái rừng đặc trưng nhất của nước ta là gì?", opts:["A. Rừng ôn đới núi cao.","B. Rừng lá kim phương bắc.","C. Rừng nhiệt đới ẩm lá rộng thường xanh.","D. Xavan và cây bụi khô."], ans:2},
+  {id:5, q:"Vùng nào sau đây ở nước ta chịu ảnh hưởng mạnh nhất của bão?", opts:["A. Vùng núi Tây Bắc.","B. Vùng đồng bằng sông Cửu Long.","C. Vùng ven biển miền Trung.","D. Vùng Tây Nguyên."], ans:2},
+  {id:6, q:"Loại khoáng sản có trữ lượng lớn nhất và giá trị kinh tế cao nhất ở thềm lục địa nước ta là gì?", opts:["A. Sắt.","B. Dầu mỏ và khí tự nhiên.","C. Bô-xít.","D. Than đá."], ans:1},
+  {id:7, q:"Đường bờ biển của nước ta dài khoảng bao nhiêu km?", opts:["A. 2.500 km.","B. 3.260 km.","C. 3.500 km.","D. 4.000 km."], ans:1},
+  {id:8, q:"Căn cứ vào Atlat Địa lí Việt Nam, đỉnh núi cao nhất nước ta là gì?", opts:["A. Núi Phượng Hoàng.","B. Đỉnh Fansipan.","C. Núi Ngọc Linh.","D. Đỉnh Bạch Mã."], ans:1},
+  {id:9, q:"Nguyên nhân chủ yếu gây mưa vào mùa hạ cho cả hai miền Nam, Bắc nước ta là do hoạt động của:", opts:["A. Gió mùa Tây Nam và Tín phong bán cầu Bắc.","B. Gió mùa Đông Bắc và dải hội tụ nhiệt đới.","C. Gió mùa Tây Nam và dải hội tụ nhiệt đới / áp thấp nhiệt đới.","D. Gió Tây khô nóng và gió Đông Bắc."], ans:2},
+  {id:10, q:"Tính chất nhiệt đới của khí hậu nước ta được quy định bởi yếu tố nào?", opts:["A. Vị trí nằm trong vùng nội chí tuyến.","B. Giáp biển Đông rộng lớn.","C. Địa hình đồi núi chiếm phần lớn.","D. Chịu ảnh hưởng của các khối khí di chuyển qua biển."], ans:0}
+];
+
+const GEO_ESSAY = `
+<div class="card essay-box">
+  <h3>Tóm tắt Tự luận Địa Lý</h3>
+  <ul>
+    <li><b>Đặc điểm vị trí địa lí:</b> Nằm ở rìa phía đông bán đảo Đông Dương, trung tâm khu vực Đông Nam Á; là cầu nối giữa đất liền và đại dương, giữa các nước Đông Nam Á lục địa và hải đảo.</li>
+    <li><b>Thiên nhiên nhiệt đới ẩm gió mùa:</b> Khí hậu nhiệt đới với lượng mưa lớn (1500–2000mm/năm), độ ẩm >80%. Hoạt động của gió mùa Đông Bắc (mùa đông) và gió mùa Tây Nam (mùa hạ) tạo nên sự phân hóa mùa sắc nét.</li>
+    <li><b>Ảnh hưởng của Biển Đông:</b> Cung cấp lượng ẩm lớn, mang lại khí hậu ôn hòa, tài nguyên biển phong phú (dầu khí, hải sản, du lịch) nhưng cũng chịu thiên tai bão lụt thường xuyên.</li>
+  </ul>
+</div>`;
+
+// ==================== ĐIỀU KHIỂN LOGIC ỨNG DỤNG ====================
+let currentSubject = 'bio'; // 'bio' hoặc 'geo'
+let currentList = [...BIO_QUESTIONS];
 let userAnswers = {};
 let mode = 'instant';
 let submitted = false;
+
+function switchSubject(sub) {
+  currentSubject = sub;
+  userAnswers = {};
+  submitted = false;
+
+  document.getElementById('btn-sub-bio').classList.toggle('active', sub === 'bio');
+  document.getElementById('btn-sub-geo').classList.toggle('active', sub === 'geo');
+
+  if (sub === 'bio') {
+    currentList = [...BIO_QUESTIONS];
+    document.getElementById('header-title').textContent = "🌿 Ôn Tập Sinh Học 11 (70 Câu)";
+  } else {
+    currentList = [...GEO_QUESTIONS];
+    document.getElementById('header-title').textContent = "🌍 Ôn Tập Địa Lý";
+  }
+
+  // Ẩn bảng tự luận nếu đang mở
+  document.getElementById('essay-area').style.display = 'none';
+  document.getElementById('quiz-area').style.display = 'block';
+  document.getElementById('nav-grid').style.display = 'grid';
+  document.getElementById('tab-essay').classList.remove('active');
+
+  renderAll();
+}
 
 function renderAll() {
   const nav = document.getElementById('nav-grid');
@@ -360,12 +419,14 @@ function updateUI() {
       if (status === true) correctCount++;
     }
 
-    dot.className = 'q-dot';
-    if (status !== null && status !== 'partial') {
-      if (showResult) {
-        dot.classList.add(status ? 'done-ok' : 'done-err');
-      } else {
-        dot.classList.add('done-wait');
+    if (dot) {
+      dot.className = 'q-dot';
+      if (status !== null && status !== 'partial') {
+        if (showResult) {
+          dot.classList.add(status ? 'done-ok' : 'done-err');
+        } else {
+          dot.classList.add('done-wait');
+        }
       }
     }
 
@@ -373,6 +434,7 @@ function updateUI() {
       item.items.forEach((sub, sIdx) => {
         const btnT = document.getElementById(`tf-${item.id}-${sIdx}-true`);
         const btnF = document.getElementById(`tf-${item.id}-${sIdx}-false`);
+        if (!btnT || !btnF) return;
         btnT.className = 'tf-btn';
         btnF.className = 'tf-btn';
         const picked = ua ? ua[sIdx] : undefined;
@@ -394,6 +456,7 @@ function updateUI() {
     } else {
       item.opts.forEach((_, oIdx) => {
         const btn = document.getElementById(`opt-${item.id}-${oIdx}`);
+        if (!btn) return;
         btn.className = 'opt-btn';
         if (ua !== undefined) {
           if (showResult) {
@@ -441,7 +504,7 @@ function shuffleQuestions() {
 }
 
 function filterWrong() {
-  const wrongList = QUESTIONS.filter(item => isQuestionCorrect(item) === false);
+  const wrongList = currentList.filter(item => isQuestionCorrect(item) === false);
   if (wrongList.length === 0) {
     alert('Bạn chưa có câu trả lời sai nào (hoặc chưa làm bài)!');
     return;
@@ -455,7 +518,7 @@ function filterWrong() {
 function resetQuiz() {
   userAnswers = {};
   submitted = false;
-  currentList = [...QUESTIONS];
+  currentList = (currentSubject === 'bio') ? [...BIO_QUESTIONS] : [...GEO_QUESTIONS];
   renderAll();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
@@ -466,6 +529,11 @@ function toggleEssay() {
   const grid = document.getElementById('nav-grid');
   const btn = document.getElementById('tab-essay');
   const showingEssay = essay.style.display === 'block';
+
+  if (!showingEssay) {
+    essay.innerHTML = (currentSubject === 'bio') ? BIO_ESSAY : GEO_ESSAY;
+  }
+
   essay.style.display = showingEssay ? 'none' : 'block';
   quiz.style.display = showingEssay ? 'block' : 'none';
   grid.style.display = showingEssay ? 'grid' : 'none';
